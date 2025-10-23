@@ -1,0 +1,11 @@
+:root {
+  --font-family: "Gilroy", sans-serif;
+
+  --color-bg: #141414;
+  --color-text: #f9f9f9;
+
+  /* --color-primary: #f4c550;
+  --color-secondary: #ffdc86; */
+
+  --transition: 0.3s ease;
+}
