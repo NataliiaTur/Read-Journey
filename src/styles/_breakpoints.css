@@ -1,0 +1,18 @@
+:root {
+  --bp-mobile-s: 320px;
+  --bp-mobile-m: 375px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1440px;
+}
+
+/* @media (min-width: var(--bp-tablet)) {
+  .title {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: var(--bp-desktop)) {
+  .title {
+    font-size: 32px;
+  }
+} */

@@ -3,6 +3,8 @@ html {
 }
 
 body {
+  min-height: 100vh;
+
   font-family: var(--font-family);
   color: var(--color-text);
   background-color: var(--color-bg);
@@ -23,6 +25,18 @@ h6,
 p,
 ul {
   margin: 0;
+}
+
+h1 {
+  font-size: 64px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 20px;
 }
 
 img,
@@ -46,4 +60,17 @@ button {
 
 address {
   font-style: normal;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
