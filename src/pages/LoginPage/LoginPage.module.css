@@ -1,0 +1,149 @@
+.authContainer {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.authBlock {
+  background-color: var(--color-bg-secondary);
+  border-radius: 30px;
+  padding: 40px 64px 40px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 736px;
+}
+
+.authContent {
+  max-width: 472px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logo {
+  margin-bottom: 107px;
+  display: flex;
+  gap: 4px;
+}
+
+.logoIcon {
+}
+
+.logoText {
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.authTitle {
+  font-weight: 700;
+  line-height: 94%;
+  letter-spacing: 0.02em;
+  margin-bottom: 40px;
+  color: var(--color-text);
+}
+
+.mainTitleWord {
+  color: rgba(227, 227, 227, 0.5);
+}
+
+/* Правий блок з візуалом */
+.authVisual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+}
+
+.phoneMockup {
+  width: 100%;
+  max-width: 405px;
+}
+
+.phoneMockup svg {
+  width: 100%;
+  height: auto;
+}
+
+.bookPosters rect {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.bookPosters rect:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.bookPosters rect:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.bookPosters rect:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.bookPosters rect:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+
+/* Tablet */
+@media screen and (max-width: 1199px) {
+  .authTitle {
+    font-size: 48px;
+  }
+
+  .authBlock {
+    padding: 32px;
+  }
+
+  .authVisual {
+    padding: 40px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+  .authContainer {
+    flex-direction: column;
+  }
+
+  .authBlock {
+    min-height: auto;
+    padding: 40px 20px;
+  }
+
+  .authTitle {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+
+  .authVisual {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 374px) {
+  .authTitle {
+    font-size: 28px;
+  }
+
+  .authBlock {
+    padding: 32px 16px;
+  }
+}

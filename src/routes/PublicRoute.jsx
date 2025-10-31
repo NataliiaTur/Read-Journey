@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../redux/auth/authSlice.js";
+import { selectIsLoggedIn } from "@redux/auth/authSlice.js";
 import { Navigate } from "react-router-dom";
 
 function PublicRoute({ children }) {

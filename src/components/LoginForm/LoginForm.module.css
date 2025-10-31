@@ -1,0 +1,200 @@
+.formGroup {
+  margin-bottom: 14px;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.formInput {
+  width: 100%;
+  padding: 16px 14px;
+  background-color: var(--color-bg-tertiary);
+  border: none;
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  transition: padding 0.2s ease;
+}
+
+.formInput:hover {
+  border: 1px solid rgba(249, 249, 249, 0.1);
+}
+
+.formInput:focus,
+.formInput:not(:placeholder-shown) {
+  outline: none;
+}
+
+.formInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.formInputError {
+  border: 1px solid var(--color-error);
+}
+
+.formInputSuccess {
+  border: 1px solid #30b94d;
+}
+
+.formSuccess {
+  color: #30b94d;
+}
+
+/* Специфічний padding для кожного поля при фокусі/заповненні */
+.formGroup[data-field="email"] .formInput:focus,
+.formGroup[data-field="email"] .formInput:not(:placeholder-shown) {
+  outline: none;
+  padding-left: 52px; /* 14px + 38px (Mail:) + 10px */
+}
+
+.formGroup[data-field="password"] .formInput:focus,
+.formGroup[data-field="password"] .formInput:not(:placeholder-shown) {
+  outline: none;
+  padding-left: 90px; /* 14px + 76px (Password:) + 10px */
+}
+
+/* =======================
+   Placeholder Label (inside input)
+======================= */
+.placeholderLabel {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  gap: 10px;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+}
+
+.labelName {
+  color: #686868;
+}
+
+.labelValue {
+  color: #f9f9f9;
+  transition: opacity 0.2s ease;
+}
+
+/* приховуємо тільки підказку при фокусі або коли інпут заповнений */
+.formInput:focus + .placeholderLabel .labelValue,
+.formInput:not(:placeholder-shown) + .placeholderLabel .labelValue {
+  opacity: 0;
+}
+
+/* =======================
+   Form Error
+======================= */
+.formError {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--color-error);
+}
+/* =======================
+   Password Toggle
+======================= */
+.passwordGroup {
+  position: relative;
+}
+
+.passwordToggle svg path {
+  stroke: #f9f9f9;
+  fill: none;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+
+  transition: color var(--transition-default);
+  z-index: 3;
+}
+
+.passwordToggle:hover {
+  color: var(--color-text);
+}
+
+.passwordToggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* =======================
+  Submit Button and Link
+======================= */
+.wrapperButtonLink {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 82px;
+}
+
+.submitButton {
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: rgba(249, 249, 249, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 249, 249, 0.2);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* =======================
+   Link near Submit Button
+======================= */
+.authLink {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #686868;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+/* =======================
+   Responsive
+======================= */
+@media screen and (max-width: 767px) {
+  .formGroup {
+    margin-bottom: 12px;
+  }
+
+  .formInput {
+    padding: 14px 12px;
+    font-size: 14px;
+  }
+
+  .submitButton {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+}

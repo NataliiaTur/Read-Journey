@@ -18,11 +18,11 @@
       <path fill="none" stroke="#f9f9f9" style="stroke:var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.4" d="m12 8 8 8-8 8"/>
     </symbol>
     <symbol id="icon-eye" viewBox="0 0 32 32">
-      <path fill="none" stroke="#f9f9f9" style="stroke:var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.08" d="M1.333 16S6.666 5.333 16 5.333 30.667 16 30.667 16 25.334 26.667 16 26.667C6.667 26.667 1.333 16 1.333 16z"/>
-      <path fill="none" stroke="#f9f9f9" style="stroke:var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.08" d="M16 20a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+      <path style="stroke:var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.08" d="M1.333 16S6.666 5.333 16 5.333 30.667 16 30.667 16 25.334 26.667 16 26.667C6.667 26.667 1.333 16 1.333 16z"/>
+      <path style="stroke:var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.08" d="M16 20a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
     </symbol>
     <symbol id="icon-eye-off" viewBox="0 0 32 32">
-      <path fill="none" stroke="#f9f9f9" style="stroke:var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.08" d="M23.92 23.92A13.43 13.43 0 0 1 16 26.667C6.667 26.667 1.333 16 1.333 16A24.605 24.605 0 0 1 8.08 8.08m5.12-2.427a12.161 12.161 0 0 1 2.8-.32C25.333 5.333 30.667 16 30.667 16a24.646 24.646 0 0 1-2.88 4.253m-8.96-1.426a4.003 4.003 0 0 1-5.755.102 3.994 3.994 0 0 1-.824-4.457c.219-.491.534-.932.927-1.298M1.333 1.333l29.333 29.333"/>
+      <path fill="none" style="stroke:var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.08" d="M23.92 23.92A13.43 13.43 0 0 1 16 26.667C6.667 26.667 1.333 16 1.333 16A24.605 24.605 0 0 1 8.08 8.08m5.12-2.427a12.161 12.161 0 0 1 2.8-.32C25.333 5.333 30.667 16 30.667 16a24.646 24.646 0 0 1-2.88 4.253m-8.96-1.426a4.003 4.003 0 0 1-5.755.102 3.994 3.994 0 0 1-.824-4.457c.219-.491.534-.932.927-1.298M1.333 1.333l29.333 29.333"/>
     </symbol>
     <symbol id="icon-check" viewBox="0 0 32 32">
       <path fill="#30b94d" style="fill:var(--color3, #30b94d)" d="m15 21.76-5.4-6.081 1.8-2.026 3.601 4.052L22.2 9.6l1.801 2.027-9 10.133z"/>

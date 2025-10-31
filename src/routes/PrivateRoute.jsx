@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn, selectIsRefreshing } from "../redux/auth/authSlice";
+import { selectIsLoggedIn, selectIsRefreshing } from "@redux/auth/authSlice";
 
 /**
  * Компонент для захисту приватних роутів

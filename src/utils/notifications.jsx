@@ -12,7 +12,7 @@ export const showSuccessNotification = (message) => {
   });
 };
 
-export const showErrorNotification = (messsage) => {
+export const showErrorNotification = (message) => {
   toast.error(message, {
     position: "top-right",
     autoClose: 4000,
@@ -59,15 +59,16 @@ export const handleApiError = (error) => {
 // успішна операція
 export const showOperationSuccess = (operation) => {
   const messages = {
-    register: 'Registration successful! Welcome!',
-    login: 'Login successful! Welcome back!',
-    logout: 'Logged out successfully',
-    bookAdded: 'Book added to your library!',
-    bookRemoved: 'Book removed from your library',
-    readingStarted: 'Reading session started!',
-    readingStopped: 'Reading session completed!',
-    bookFinished: 'Congratulations! Book finished!',
-    readingDeleted: 'Reading record deleted',
+    register: "Registration successful! Welcome!",
+    login: "Login successful! Welcome back!",
+    logout: "Logged out successfully",
+    bookAdded: "Book added to your library!",
+    bookRemoved: "Book removed from your library",
+    readingStarted: "Reading session started!",
+    readingStopped: "Reading session completed!",
+    bookFinished: "Congratulations! Book finished!",
+    readingDeleted: "Reading record deleted",
   };
 
-  showSuccessNotification(messages[operation] || 'Operation successful!');
+  showSuccessNotification(messages[operation] || "Operation successful!");
+};

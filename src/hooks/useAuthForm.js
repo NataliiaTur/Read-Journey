@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { register as registerUser, login } from "../redux/auth/authOperations";
-import { selectIsLoading, selectError } from "../redux/auth/authSlice";
+import { register as registerUser, login } from "@redux/auth/authOperations";
+import { selectIsLoading, selectError } from "@redux/auth/authSlice";
 import {
   showErrorNotification,
   showOperationSuccess,
@@ -18,15 +18,23 @@ export const useAuthForm = (schema, formType) => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
+  const formMethods = useForm({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    resolver: yupResolver(schema),
-    mode: "onBlur",
-  });
+    watch,
+  } = formMethods;
 
   // Показуємо помилку, якщо вона є
   useEffect(() => {
@@ -63,5 +71,6 @@ export const useAuthForm = (schema, formType) => {
     handleSubmit: handleSubmit(onSubmit),
     errors,
     isLoading,
+    watch,
   };
 };

@@ -1,0 +1,9 @@
+.phoneWrapper {
+  padding: 80px 97px 0;
+  background-color: var(--color-bg-secondary);
+  border-radius: 30px;
+}
+
+.phoneImage {
+  height: 100%;
+}
