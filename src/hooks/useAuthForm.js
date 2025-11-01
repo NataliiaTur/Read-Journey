@@ -18,14 +18,26 @@ export const useAuthForm = (schema, formType) => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
+  // Динамічні defaultValues в залежності від типу форми
+  const getDefaultValues = () => {
+    if (formType === "register") {
+      return {
+        name: "",
+        email: "",
+        password: "",
+      };
+    }
+    // Для login форми тільки email і password
+    return {
+      email: "",
+      password: "",
+    };
+  };
+
   const formMethods = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
+    defaultValues: getDefaultValues(),
   });
 
   const {
