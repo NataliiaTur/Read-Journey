@@ -27,6 +27,31 @@
 
 .navLink {
   padding: 24px 0 24px;
+  position: relative;
+}
+
+.navLinkHome.navLinkActive::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 11px;
+  width: 43px;
+  height: 3px;
+  background-color: #4f92f7;
+  border-radius: 8px;
+}
+
+.navLinkLibrary.navLinkActive::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 11px;
+  width: 68px;
+  height: 3px;
+  background-color: #4f92f7;
+  border-radius: 8px;
 }
 
 .userBlock {

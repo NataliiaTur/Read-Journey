@@ -50,7 +50,9 @@ const Header = () => {
             <NavLink
               to="/recommended"
               className={({ isActive }) =>
-                `${css.navLink} ${isActive ? css.navLinkActive : ""}`
+                `${css.navLink} ${css.navLinkHome} ${
+                  isActive ? css.navLinkActive : ""
+                }`
               }
             >
               Home
@@ -59,7 +61,9 @@ const Header = () => {
             <NavLink
               to="/library"
               className={({ isActive }) =>
-                `${css.navLink} ${isActive ? css.navLinkActive : ""}`
+                `${css.navLink} ${css.navLinkLibrary} ${
+                  isActive ? css.navLinkActive : ""
+                }`
               }
             >
               My Library
