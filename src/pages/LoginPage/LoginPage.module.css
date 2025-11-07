@@ -1,149 +1,91 @@
 .authContainer {
   display: flex;
-  gap: 16px;
-  align-items: stretch;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .authBlock {
-  background-color: var(--color-bg-secondary);
+  padding: 20px 20px 40px;
   border-radius: 30px;
-  padding: 40px 64px 40px 64px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 736px;
-}
-
-.authContent {
-  max-width: 472px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.logo {
-  margin-bottom: 107px;
-  display: flex;
-  gap: 4px;
-}
-
-.logoIcon {
+  height: 100%;
+  background-color: var(--color-bg-secondary);
 }
 
 .logoText {
-  font-weight: 700;
-  color: var(--color-text);
-  font-size: 18px;
-  line-height: 100%;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  display: none;
+}
+
+.logo {
+  margin-bottom: 40px;
 }
 
 .authTitle {
   font-weight: 700;
-  line-height: 94%;
+  font-size: 32px;
+  line-height: 100%;
   letter-spacing: 0.02em;
-  margin-bottom: 40px;
-  color: var(--color-text);
+  color: #f9f9f9;
+  margin-bottom: 20px;
 }
 
 .mainTitleWord {
   color: rgba(227, 227, 227, 0.5);
 }
 
-/* Правий блок з візуалом */
-.authVisual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 60px;
-}
-
-.phoneMockup {
-  width: 100%;
-  max-width: 405px;
-}
-
-.phoneMockup svg {
-  width: 100%;
-  height: auto;
-}
-
-.bookPosters rect {
-  opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.bookPosters rect:nth-child(1) {
-  animation-delay: 0.2s;
-}
-
-.bookPosters rect:nth-child(2) {
-  animation-delay: 0.4s;
-}
-
-.bookPosters rect:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-.bookPosters rect:nth-child(4) {
-  animation-delay: 0.8s;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive */
-
-/* Tablet */
-@media screen and (max-width: 1199px) {
-  .authTitle {
-    font-size: 48px;
-  }
-
+@media screen and (min-width: 768px) {
   .authBlock {
-    padding: 32px;
+    padding: 40px 64px 214px;
   }
 
-  .authVisual {
-    padding: 40px;
+  .logoText {
+    display: inline;
+  }
+
+  .logo {
+    display: flex;
+    gap: 4px;
+    font-weight: 700;
+    color: var(--color-text);
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 157.5px;
+  }
+
+  .authTitle {
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 94%;
+    letter-spacing: 0.02em;
+    color: #f9f9f9;
+    margin-bottom: 40px;
   }
 }
 
-/* Mobile */
-@media screen and (max-width: 767px) {
+@media screen and (min-width: 1440px) {
   .authContainer {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
   }
 
   .authBlock {
-    min-height: auto;
-    padding: 40px 20px;
+    padding: 42px 53px 38px 75px;
+    height: 100%;
+    width: 600px;
+  }
+
+  .logo {
+    margin-bottom: 107px;
+    display: flex;
+    gap: 4px;
   }
 
   .authTitle {
-    font-size: 32px;
-    margin-bottom: 32px;
-  }
-
-  .authVisual {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 374px) {
-  .authTitle {
-    font-size: 28px;
-  }
-
-  .authBlock {
-    padding: 32px 16px;
+    width: 444px;
+    max-height: 180px;
   }
 }

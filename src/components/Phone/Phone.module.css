@@ -1,9 +1,32 @@
 .phoneWrapper {
-  padding: 80px 97px 0;
-  background-color: var(--color-bg-secondary);
   border-radius: 30px;
+  background-color: var(--color-bg-secondary);
+  overflow: hidden;
+  padding: 20px 40px 0 40px;
 }
 
 .phoneImage {
   height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .phoneWrapper {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .phoneWrapper {
+    display: flex;
+    padding: 80px 97px 0;
+    background-color: var(--color-bg-secondary);
+    border-radius: 30px;
+    width: 600px;
+    height: 100%;
+    flex-shrink: 0;
+  }
+
+  .phoneImage {
+    height: 100%;
+  }
 }

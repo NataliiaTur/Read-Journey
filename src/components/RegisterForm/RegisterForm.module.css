@@ -3,7 +3,7 @@
 }
 
 .formGroup {
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 
 .inputWrapper {
@@ -13,15 +13,15 @@
 
 .formInput {
   width: 100%;
-  padding: 16px 14px;
+  padding: 14px;
   background-color: var(--color-bg-tertiary);
   border: none;
   border-radius: 12px;
   position: relative;
   z-index: 1;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  line-height: 129%;
+  line-height: 133%;
   letter-spacing: -0.02em;
   color: #f9f9f9;
   transition: padding 0.2s ease;
@@ -70,9 +70,6 @@
   padding-left: 85px; /* 14px + 76px (Password:) + 10px */
 }
 
-/* =======================
-   Placeholder Label (inside input)
-======================= */
 .placeholderLabel {
   position: absolute;
   top: 50%;
@@ -102,15 +99,12 @@
   transition: opacity 0.2s ease;
 }
 
-/* Приховуємо тільки підказку при фокусі або коли інпут заповнений */
+/* Приховуємо підказку при фокусі або коли інпут заповнений */
 .formInput:focus + .placeholderLabel .labelValue,
 .formInput:not(:placeholder-shown) + .placeholderLabel .labelValue {
   opacity: 0;
 }
 
-/* =======================
-Form Messages
-======================= */
 .formError {
   display: block;
   margin-top: 4px;
@@ -126,9 +120,6 @@ Form Messages
   font-weight: 500;
 }
 
-/* =======================
-   Password Toggle
-======================= */
 .passwordGroup {
   position: relative;
 }
@@ -163,23 +154,22 @@ Form Messages
   opacity: 0.5;
 }
 
-/* =======================
-   Wrapper Submit Button and Link
-======================= */
 .wrapperButtonLink {
   display: flex;
-  gap: 20px;
+  gap: 14px;
   align-items: center;
-  margin-top: 82px;
+  margin-top: 20px;
 }
 
-/* =======================
-   Submit Button
-======================= */
 .submitButton {
   white-space: nowrap;
   flex-shrink: 0;
   letter-spacing: 0.02em;
+  width: 140px;
+  height: 42px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
 }
 
 .submitButton:hover:not(:disabled) {
@@ -197,222 +187,13 @@ Form Messages
   cursor: not-allowed;
 }
 
-/* =======================
-   Link near Submit Button
-======================= */
 .authLink {
   font-weight: 500;
-  font-size: 14px;
-  line-height: 129%;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  flex-shrink: 0;
-  color: #686868;
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  transition: opacity 0.2s ease;
-}
-
-.authLink:hover {
-  opacity: 0.8;
-}
-
-/* =======================
-   Responsive
-======================= */
-@media screen and (max-width: 1199px) {
-  .wrapperButtonLink {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-    margin-top: 60px;
-  }
-
-  .formSubmit {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .formGroup {
-    margin-bottom: 12px;
-  }
-
-  .formInput {
-    padding: 14px 12px;
-    font-size: 14px;
-  }
-
-  .formSubmit {
-    padding: 14px 24px;
-    font-size: 16px;
-  }
-
-  .wrapperButtonLink {
-    margin-top: 40px;
-  }
-}
-
-.formInput:hover {
-  border: 1px solid rgba(249, 249, 249, 0.1);
-}
-
-.formInput:focus,
-.formInput:not(:placeholder-shown) {
-  outline: none;
-}
-
-.formInput:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.formInputError {
-  border: 1px solid var(--color-error);
-}
-
-/* =======================
-   Placeholder Label (inside input)
-======================= */
-.placeholderLabel {
-  position: absolute;
-  top: 50%;
-  left: 14px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  display: flex;
-  gap: 10px;
-  transition: opacity 0.2s ease;
-  z-index: 2;
-}
-
-.labelName {
-  color: #686868;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 129%;
-  letter-spacing: -0.02em;
-}
-
-.labelValue {
-  color: #f9f9f9;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 129%;
-  letter-spacing: -0.02em;
-  transition: opacity 0.2s ease;
-}
-
-/* Приховуємо тільки підказку при фокусі або коли інпут заповнений */
-.formInput:focus + .placeholderLabel .labelValue,
-.formInput:not(:placeholder-shown) + .placeholderLabel .labelValue {
-  opacity: 0;
-}
-
-/* =======================
-   Form Error
-======================= */
-.formError {
-  display: block;
-  margin-top: 4px;
   font-size: 12px;
-  color: var(--color-error);
-}
-
-/* =======================
-   Password Toggle
-======================= */
-.passwordGroup {
-  position: relative;
-}
-
-.passwordToggle svg path {
-  stroke: #f9f9f9;
-  fill: none;
-}
-
-.passwordToggle {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity var(--transition-default);
-  z-index: 3;
-}
-
-.passwordToggle:hover {
-  opacity: 0.8;
-}
-
-.passwordToggle:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-/* =======================
-   Wrapper Submit Button and Link
-======================= */
-.wrapperButtonLink {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-top: 82px;
-}
-
-/* =======================
-   Submit Button
-======================= */
-.formSubmit {
-  padding: 16px 54px;
-  background-color: #f9f9f9;
-  color: #1f1f1f;
-  border: none;
-  border-radius: 30px;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: all var(--transition-default);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.formSubmit:hover:not(:disabled) {
-  background-color: rgba(249, 249, 249, 0.9);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(249, 249, 249, 0.2);
-}
-
-.formSubmit:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.formSubmit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* =======================
-   Link near Submit Button
-======================= */
-.authLinkText {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 129%;
+  line-height: 117%;
   letter-spacing: -0.02em;
-  color: #686868;
   white-space: nowrap;
   flex-shrink: 0;
-}
-
-.authLink {
   color: #686868;
   text-decoration: underline;
   text-decoration-skip-ink: none;
@@ -423,38 +204,43 @@ Form Messages
   opacity: 0.8;
 }
 
-/* =======================
-   Responsive
-======================= */
-@media screen and (max-width: 1199px) {
-  .wrapperButtonLink {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-    margin-top: 60px;
-  }
-
-  .formSubmit {
-    width: 100%;
-  }
+.authLink:hover {
+  opacity: 0.8;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (min-width: 768px) {
   .formGroup {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   .formInput {
-    padding: 14px 12px;
+    padding: 16px 14px;
     font-size: 14px;
-  }
-
-  .formSubmit {
-    padding: 14px 24px;
-    font-size: 16px;
+    line-height: 129%;
   }
 
   .wrapperButtonLink {
-    margin-top: 40px;
+    gap: 20px;
+    margin-top: 82px;
+  }
+
+  .submitButton {
+    width: 225px;
+    height: 52px;
+    font-size: 20px;
+    line-height: 100%;
+  }
+
+  .authLink {
+    font-size: 14px;
+    line-height: 129%;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .formGroup {
+    margin-bottom: 14px;
   }
 }

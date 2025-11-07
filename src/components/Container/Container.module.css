@@ -1,31 +1,25 @@
 .container {
-  /* MOBILE FLUID: 320px+ */
-  width: 100%;
-  max-width: 100%;
+  width: 100%; /* Гумова верстка від 320px */
+  max-width: 375px; /* Адаптивна від 375px */
   margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-/* MOBILE ADAPTIVE: від 375px */
-@media screen and (min-width: 375px) {
-  .container {
-    max-width: 375px;
-  }
-}
-
-/* TABLET: від 768px */
+/* Tablet - від 768px */
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 
-/* DESKTOP: від 1440px */
+/* Desktop - від 1440px */
 @media screen and (min-width: 1440px) {
   .container {
-    max-width: 1440px;
-    padding-left: 16px;
-    padding-right: 16px;
+    max-width: 1280px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }

@@ -15,7 +15,7 @@ function LoginPage() {
               <svg className={css.logoIcon} width="42" height="17">
                 <use href="icons.svg#icon-LogoMin"></use>
               </svg>
-              <span className={css.logoText}>ReadJourney</span>
+              <span className={css.logoText}>Read Journey</span>
             </div>
 
             <h1 className={css.authTitle}>
