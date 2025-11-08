@@ -47,5 +47,12 @@
       <path fill="none" opacity=".8" stroke="#f9f9f9" style="stroke:var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-width="3.2" d="M22.933 18.667c.369 0 .554 0 .704.082a.708.708 0 0 1 .293.324c.067.157.05.324.016.659a10.672 10.672 0 0 1-12.694 9.397 10.66 10.66 0 0 1-8.381-8.381 10.666 10.666 0 0 1 9.397-12.694c.334-.034.502-.05.659.016.13.055.257.17.324.293.082.15.082.334.082.704V17.6c0 .373 0 .56.073.703a.665.665 0 0 0 .291.291c.143.073.329.073.703.073h8.533z"/>
       <path fill="none" stroke="#f9f9f9" style="stroke:var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-width="3.2" d="M18.667 3.733c0-.369 0-.554.082-.704a.713.713 0 0 1 .324-.293c.157-.067.324-.05.659-.016a10.67 10.67 0 0 1 9.549 9.549c.034.334.05.502-.016.659a.704.704 0 0 1-.293.324c-.15.082-.334.082-.704.082h-8.533c-.373 0-.56 0-.703-.073a.665.665 0 0 1-.291-.291c-.073-.143-.073-.329-.073-.703V3.734z"/>
     </symbol>
+    <symbol id="icon-burger" viewBox="0 0 46 32">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4" d="M2 16h42M2 2h42M16 30h28"></path>
+</symbol>
+<symbol id="icon-x" viewBox="0 0 32 32">
+<path stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M24 8l-16 16"></path>
+<path stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M8 8l16 16"></path>
+</symbol>
   </defs>
 </svg>

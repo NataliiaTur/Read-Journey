@@ -173,7 +173,8 @@
 }
 
 .submitButton:hover:not(:disabled) {
-  background-color: rgba(249, 249, 249, 0.9);
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  color: #f9f9f9;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(249, 249, 249, 0.2);
 }
@@ -201,10 +202,9 @@
 }
 
 .authLink:hover {
-  opacity: 0.8;
-}
-
-.authLink:hover {
+  color: #f9f9f9;
+  font-size: 14px;
+  line-height: 129%;
   opacity: 0.8;
 }
 
