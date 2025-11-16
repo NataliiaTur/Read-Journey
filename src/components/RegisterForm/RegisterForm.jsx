@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuthForm } from "@hooks/useAuthForm";
 import { registerSchema } from "@schemas/validationSchemas.js";
 import { Link } from "react-router-dom";
-import { Icon } from "@components/Icon/Icon.jsx";
+import Icon from "@components/Icon/Icon.jsx";
 import { Button } from "@components/Button/Button.jsx";
 import css from "./RegisterForm.module.css";
 

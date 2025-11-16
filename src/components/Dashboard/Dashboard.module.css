@@ -1,0 +1,369 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.filtersBlock,
+.instructionsBlock,
+.quoteBlock {
+  background: #1f1f1f;
+  border-radius: 30px;
+}
+
+.filtersBlock {
+  padding: 20px;
+  width: 335px;
+}
+
+.title {
+  font-size: 10px;
+  font-weight: 500;
+  color: #f9f9f9;
+  margin-bottom: 9px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 12px;
+  color: #686868;
+  line-height: 133%;
+}
+
+.input {
+  width: 100%;
+  padding: 14px;
+  background: #262626;
+  border: none;
+  border-radius: 12px;
+  color: #f9f9f9;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  border: 1px solid rgba(249, 249, 249, 0.1);
+  background-color: #262626;
+}
+
+.input::placeholder {
+  color: #f9f9f9;
+}
+
+.error {
+  font-size: 12px;
+  color: #e74a3b;
+  margin-top: 4px;
+}
+
+.applyButton {
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  border-radius: 30px;
+  padding: 10px 20px;
+  width: 98px;
+  height: 38px;
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: 0.02em;
+  color: #f9f9f9;
+  background-color: transparent;
+  white-space: nowrap;
+  margin-bottom: 20px;
+}
+
+.applyButton:hover {
+  color: #1f1f1f;
+}
+
+/* Instructions Block */
+.instructionsBlock {
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #262626;
+}
+
+.instructionsTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #f9f9f9;
+  margin-bottom: 20px;
+}
+
+.instructionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.instructionItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #f9f9f9;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f1f1f;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.stepText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #686868;
+  margin: 0;
+  padding-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.stepTextSpan {
+  color: #f9f9f9;
+}
+
+.libraryLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #686868;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-decoration: underline;
+  transition: background 0.3s;
+}
+
+.libraryLink:hover {
+  background: #2a2a2a;
+}
+
+.arrowIcon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Quote Block */
+.quoteBlock {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .dashboard {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .filtersBlock {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    border-radius: 30px;
+    width: 100%;
+    flex-grow: 1;
+    padding: 32px;
+  }
+
+  .filtersWrapper,
+  .instructionsBlock {
+    flex: 1;
+    max-width: 50%;
+  }
+
+  .filtersWrapper {
+    margin-bottom: 0;
+  }
+
+  .title {
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 129%;
+  }
+
+  .input {
+    width: 100%;
+    padding: 16px 14px;
+  }
+
+  .applyButton {
+    padding: 12px 28px;
+    width: 122px;
+    height: 42px;
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 112%;
+  }
+
+  /* Instructions Block */
+  .instructionsTitle {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+
+  .instructionsList {
+    margin-bottom: 26px;
+  }
+
+  .instructionItem {
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .stepNumber {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  /* Quote Block */
+  .quoteBlock {
+    display: none;
+  }
+
+  .quoteIcon {
+    width: 40px;
+    height: 40px;
+    color: #f9f9f9;
+  }
+
+  .quoteText {
+    font-size: 14px;
+    line-height: 1.3;
+    color: rgba(249, 249, 249, 0.8);
+    margin: 0;
+  }
+
+  .highlight {
+    color: #4f92f7;
+    font-weight: 700;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 100%;
+
+    flex: 1;
+  }
+
+  .filtersBlock,
+  .instructionsBlock {
+    flex-direction: column;
+    padding: 20px;
+    width: 335px;
+  }
+
+  .filtersBlock {
+    gap: 20px;
+  }
+
+  .filtersWrapper,
+  .instructionsBlock {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 129%;
+  }
+
+  .form {
+    gap: 8px;
+  }
+
+  .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .label {
+    font-size: 14px;
+    line-height: 129%;
+  }
+
+  .input {
+    width: 100%;
+    padding: 16px 14px;
+  }
+
+  .applyButton {
+    margin-bottom: 0;
+  }
+
+  /* Quote Block */
+  .quoteBlock {
+    display: flex;
+    gap: 14px;
+    padding: 15px 20px 14px;
+    align-items: center;
+    justify-content: center;
+    background-color: #262626;
+    border-radius: 12px;
+  }
+
+  .quoteIcon {
+    width: 40px;
+    height: 40px;
+    color: currentColor;
+  }
+
+  .quoteText {
+    font-size: 14px;
+    line-height: 1.29;
+    letter-spacing: -0.02em;
+    color: #686868;
+    margin: 0;
+  }
+
+  .highlight {
+    color: #f9f9f9;
+  }
+}

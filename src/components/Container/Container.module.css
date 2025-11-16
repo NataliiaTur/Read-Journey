@@ -4,6 +4,7 @@
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
+  outline: 1px solid red;
 }
 
 /* Tablet - від 768px */
@@ -18,8 +19,8 @@
 /* Desktop - від 1440px */
 @media screen and (min-width: 1440px) {
   .container {
-    max-width: 1280px;
-    padding-left: 20px;
-    padding-right: 20px;
+    max-width: 1216px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

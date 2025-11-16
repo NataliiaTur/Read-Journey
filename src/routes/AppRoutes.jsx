@@ -1,4 +1,3 @@
-// src/routes/AppRoutes.jsx
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,15 +5,15 @@ import { getCurrentUser } from "../redux/auth/authOperations";
 import { selectIsLoggedIn, selectIsRefreshing } from "../redux/auth/authSlice";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
-import MainLayout from "../components/MainLayout/MainLayout";
+import MainLayout from "@components/MainLayout/MainLayout";
 
 // Імпорти сторінок
-import RegisterPage from "../pages/RegisterPage/RegisterPage";
-import LoginPage from "../pages/LoginPage/LoginPage";
+import RegisterPage from "@pages/RegisterPage/RegisterPage";
+import LoginPage from "@pages/LoginPage/LoginPage";
+import RecommendedPage from "@pages/RecommendedPage/RecommendedPage.jsx";
 
 // Тимчасові заглушки для сторінок
 const WelcomePage = () => <div>Welcome Page</div>;
-const RecommendedPage = () => <div>Recommended Page</div>;
 const LibraryPage = () => <div>Library Page</div>;
 const ReadingPage = () => <div>Reading Page</div>;
 

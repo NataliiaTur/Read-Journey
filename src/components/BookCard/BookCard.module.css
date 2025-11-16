@@ -1,0 +1,131 @@
+.bookCard {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  width: 100%;
+  max-width: 137px;
+}
+
+.bookCard:hover {
+  transform: translateY(-4px);
+}
+
+.deleteButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  background: rgba(231, 74, 59, 0.9);
+  border: none;
+  border-radius: 50%;
+  color: #f9f9f9;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.3s;
+  opacity: 0;
+}
+
+.bookCard:hover .deleteButton {
+  opacity: 1;
+}
+
+.deleteButton:hover {
+  background: #e74a3b;
+  transform: scale(1.1);
+}
+
+.imageWrapper {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #262626;
+  margin-bottom: 8px;
+}
+
+.bookImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholderImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #262626 0%, #1f1f1f 100%);
+  color: rgba(249, 249, 249, 0.3);
+  font-size: 14px;
+}
+
+.bookInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bookTitle {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 129%;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%;
+}
+
+.bookAuthor {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: rgba(249, 249, 249, 0.5);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 767px) {
+  .bookTitle {
+    font-size: 12px;
+  }
+
+  .bookAuthor {
+    font-size: 10px;
+  }
+
+  .deleteButton {
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .bookTitle {
+    font-size: 14px;
+  }
+
+  .bookAuthor {
+    font-size: 10px;
+  }
+
+  .deleteButton {
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+  }
+}

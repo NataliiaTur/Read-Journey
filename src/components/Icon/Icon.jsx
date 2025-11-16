@@ -1,7 +1,16 @@
-import icons from "@public/icons.svg";
+import css from "./Icon.module.css";
 
-export const Icon = ({ id, size = 24, color = "currentColor" }) => (
-  <svg width={size} height={size} fill={color}>
-    <use xlinkHref={`${icons}#${id}`} />
-  </svg>
-);
+const Icon = ({ name, className = "", size = 24, ...props }) => {
+  return (
+    <svg
+      className={`${css.icon} ${className}`}
+      width={size}
+      height={size}
+      {...props}
+    >
+      <use href={`/icons.svg#icon-${name}`} />
+    </svg>
+  );
+};
+
+export default Icon;
