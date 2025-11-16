@@ -34,7 +34,7 @@ const Dashboard = ({ type, onFiltersApply }) => {
   };
 
   const handleReset = () => {
-    reset({ tyyle: "", author: "" });
+    reset({ title: "", author: "" });
     dispatch(clearFilters());
 
     if (onFiltersApply) {
