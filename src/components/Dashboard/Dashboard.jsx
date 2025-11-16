@@ -11,7 +11,7 @@ import { Button } from "@components/Button/Button.jsx";
 import Icon from "@components/Icon/Icon.jsx";
 import css from "./Dashboard.module.css";
 
-const Dashboard = ({ type }) => {
+const Dashboard = ({ type, onFiltersApply }) => {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
 
@@ -27,6 +27,19 @@ const Dashboard = ({ type }) => {
 
   const onSubmit = (data) => {
     dispatch(setFilters(data));
+
+    if (onFiltersApply) {
+      onFiltersApply();
+    }
+  };
+
+  const handleReset = () => {
+    reset({ tyyle: "", author: "" });
+    dispatch(clearFilters());
+
+    if (onFiltersApply) {
+      onFiltersApply();
+    }
   };
 
   return (

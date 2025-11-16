@@ -1,0 +1,109 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  position: relative;
+  width: 500px;
+  max-width: 100%;
+  background: #262626;
+  border-radius: 12px;
+  padding: 50px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.closeButton:hover {
+  transform: scale(1.1);
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+  color: #f9f9f9;
+}
+
+.iconWrapper {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.checkIcon {
+  width: 70px;
+  height: 70px;
+  color: #30b94d;
+}
+
+.message {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #f9f9f9;
+  margin: 0;
+  max-width: 400px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 335px;
+    padding: 40px 20px 30px;
+  }
+
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 16px;
+  }
+
+  .checkIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .message {
+    font-size: 14px;
+  }
+}

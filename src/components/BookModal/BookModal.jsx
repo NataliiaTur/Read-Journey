@@ -8,7 +8,7 @@ import { Button } from "../Button/Button.jsx";
 import Icon from "../Icon/Icon.jsx";
 import css from "./BookModal.module.css";
 
-const BookModal = ({ book, onClose }) => {
+const BookModal = ({ book, onClose, onSuccess }) => {
   const [addBookToLibrary, { isLoading }] = useAddBookToLibraryMutation();
 
   // Закриття по ESC
@@ -38,8 +38,12 @@ const BookModal = ({ book, onClose }) => {
   const handleAddToLibrary = async () => {
     try {
       await addBookToLibrary(book._id).unwrap();
-      showOperationSuccess("bookAdded");
-      onClose();
+      // ✅ Викликаємо onSuccess замість закриття
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        onClose();
+      }
     } catch (error) {
       showErrorNotification(
         error?.data?.message || "Failed to add book to library"

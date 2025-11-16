@@ -1,4 +1,3 @@
-import { useState } from "react";
 import css from "./RecommendedBooks.module.css";
 import { useSelector } from "react-redux";
 import { selectFilters } from "@redux/books/booksSlice.js";
@@ -6,8 +5,7 @@ import { useGetRecommendedBooksQuery } from "@redux/books/booksApi.js";
 import BookCard from "../BookCard/BookCard.jsx";
 import Icon from "../Icon/Icon.jsx";
 
-const RecommendedBooks = ({ onBookClick }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
   const filters = useSelector(selectFilters);
   const limit = 10;
 
@@ -20,13 +18,13 @@ const RecommendedBooks = ({ onBookClick }) => {
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
+      onPageChange(currentPage - 1);
     }
   };
 
   const handleNextPage = () => {
     if (data && currentPage < data.totalPages) {
-      setCurrentPage((prev) => prev + 1);
+      onPageChange(currentPage + 1);
     }
   };
 
