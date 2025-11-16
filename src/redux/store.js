@@ -27,6 +27,8 @@ const tokenMiddleware = (store) => (next) => (action) => {
     localStorage.removeItem("refreshToken");
   }
 
+  console.log(store.getState());
+
   return result;
 };
 

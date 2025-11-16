@@ -15,6 +15,12 @@ export const booksApi = createApi({
     },
   }),
   tagTypes: ["RecommendedBooks", "UserBooks", "Book", "Reading"],
+  // ✅ Додаємо глобальні налаштування
+  keepUnusedDataFor: 60, // Тримати кеш 60 секунд
+  refetchOnMountOrArgChange: 30, // Перезапитувати якщо дані старші 30 сек
+  refetchOnFocus: false, // Не перезапитувати при фокусі на вікно
+  refetchOnReconnect: true, // Перезапитувати при відновленні з'єднання
+
   endpoints: (builder) => ({
     // Отримати рекомендовані книги
     getRecommendedBooks: builder.query({

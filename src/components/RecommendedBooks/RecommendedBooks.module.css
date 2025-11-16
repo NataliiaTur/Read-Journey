@@ -6,6 +6,8 @@
   min-height: 382px;
   display: flex;
   flex-direction: column;
+
+  position: relative; /* ✅ Додаємо це */
 }
 
 .header {
@@ -157,4 +159,111 @@
   .booksList > *:nth-child(n + 11) {
     display: none;
   }
+}
+
+.fetchingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(31, 31, 31, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  z-index: 10;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(249, 249, 249, 0.1);
+  border-top-color: #4f92f7;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 12px;
+}
+
+.emptyIcon {
+  font-size: 64px;
+  opacity: 0.3;
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(249, 249, 249, 0.8);
+  margin: 0;
+}
+
+.emptyHint {
+  font-size: 14px;
+  color: rgba(249, 249, 249, 0.5);
+  margin: 0;
+  text-align: center;
+  max-width: 300px;
+}
+
+/* Error */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 12px;
+}
+
+.errorIcon {
+  font-size: 64px;
+  margin-bottom: 8px;
+}
+
+.errorTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e74a3b;
+  margin: 0;
+}
+
+.errorMessage {
+  font-size: 14px;
+  color: rgba(249, 249, 249, 0.6);
+  margin: 0;
+  text-align: center;
+  max-width: 400px;
+}
+
+.retryButton {
+  margin-top: 12px;
+  padding: 12px 24px;
+  background: #4f92f7;
+  border: none;
+  border-radius: 30px;
+  color: #f9f9f9;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.retryButton:hover {
+  background: #3a7dd8;
+  transform: translateY(-2px);
 }

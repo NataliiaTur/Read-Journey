@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { clearFilters } from "@redux/books/booksSlice.js";
 import Dashboard from "@components/Dashboard/Dashboard.jsx";
 import RecommendedBooks from "@components/RecommendedBooks/RecommendedBooks.jsx";
 import BookModal from "@components/BookModal/BookModal.jsx";
@@ -7,9 +9,17 @@ import css from "./RecommendedPage.module.css";
 
 const RecommendedPage = () => {
   const [selectedBook, setSelectedBook] = useState(null);
-
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      console.log("Leaving Recommended Page - clearing filters");
+      dispatch(clearFilters());
+    };
+  }, [dispatch]);
 
   const handleBookClick = (book) => {
     setSelectedBook(book);
@@ -30,6 +40,7 @@ const RecommendedPage = () => {
 
   // ✅ Callback для скидання пагінації
   const handleFiltersApply = () => {
+    console.log("Filters applied, resetting to page 1");
     setCurrentPage(1);
   };
 

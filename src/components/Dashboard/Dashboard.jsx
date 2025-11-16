@@ -22,24 +22,24 @@ const Dashboard = ({ type, onFiltersApply }) => {
     reset,
   } = useForm({
     resolver: yupResolver(filterBooksSchema),
-    defaultValues: filters,
+    defaultValues: { title: "", author: "" },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    console.log("=== FORM SUBMITTED ===");
+    console.log("Form data:", data);
+
     dispatch(setFilters(data));
+    console.log("Filters set in Redux");
 
     if (onFiltersApply) {
       onFiltersApply();
     }
-  };
 
-  const handleReset = () => {
-    reset({ title: "", author: "" });
-    dispatch(clearFilters());
-
-    if (onFiltersApply) {
-      onFiltersApply();
-    }
+    setTimeout(() => {
+      console.log("Resetting filters after search");
+      reset({ title: "", author: "" });
+    }, 500);
   };
 
   return (
@@ -81,10 +81,10 @@ const Dashboard = ({ type, onFiltersApply }) => {
                 <span className={css.error}>{errors.author.message}</span>
               )}
             </div>
+            <Button type="submit" className={css.applyButton}>
+              To apply
+            </Button>
           </form>
-          <Button type="submit" className={css.applyButton}>
-            To apply
-          </Button>
         </div>
 
         {/* Instructions Block */}
