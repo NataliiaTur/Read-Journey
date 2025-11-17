@@ -1,0 +1,23 @@
+.libraryPage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .libraryPage {
+    gap: 16px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .libraryPage {
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    align-items: stretch;
+  }
+}

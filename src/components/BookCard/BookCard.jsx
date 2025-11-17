@@ -1,4 +1,5 @@
 import css from "./BookCard.module.css";
+import Icon from "../Icon/Icon";
 
 const BookCard = ({ book, onClick, showDeleteButton = false, onDelete }) => {
   const { imageUrl, title, author } = book;
@@ -24,7 +25,7 @@ const BookCard = ({ book, onClick, showDeleteButton = false, onDelete }) => {
           onClick={handleDeleteClick}
           aria-label="Delete book"
         >
-          ×
+          <Icon name="trash" className={css.trashIcon} />
         </button>
       )}
 

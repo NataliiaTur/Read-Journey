@@ -42,6 +42,11 @@
   transform: scale(1.1);
 }
 
+.trashIcon {
+  width: 14px;
+  height: 14px;
+}
+
 .imageWrapper {
   width: 100%;
   aspect-ratio: 2 / 3;

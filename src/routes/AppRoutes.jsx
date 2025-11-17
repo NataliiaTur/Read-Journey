@@ -11,10 +11,10 @@ import MainLayout from "@components/MainLayout/MainLayout";
 import RegisterPage from "@pages/RegisterPage/RegisterPage";
 import LoginPage from "@pages/LoginPage/LoginPage";
 import RecommendedPage from "@pages/RecommendedPage/RecommendedPage.jsx";
+import LibraryPage from "@pages/LibraryPage/LibraryPage.jsx";
 
 // Тимчасові заглушки для сторінок
 const WelcomePage = () => <div>Welcome Page</div>;
-const LibraryPage = () => <div>Library Page</div>;
 const ReadingPage = () => <div>Reading Page</div>;
 
 const AppRoutes = () => {
