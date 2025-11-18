@@ -1,7 +1,13 @@
 import css from "./BookCard.module.css";
 import Icon from "../Icon/Icon";
 
-const BookCard = ({ book, onClick, showDeleteButton = false, onDelete }) => {
+const BookCard = ({
+  book,
+  onClick,
+  showDeleteButton = false,
+  onDelete,
+  className,
+}) => {
   const { imageUrl, title, author } = book;
 
   const handleCardClick = () => {
@@ -18,7 +24,10 @@ const BookCard = ({ book, onClick, showDeleteButton = false, onDelete }) => {
   };
 
   return (
-    <div className={css.bookCard} onClick={handleCardClick}>
+    <div
+      className={`${css.bookCard} ${className || ""}`}
+      onClick={handleCardClick}
+    >
       {showDeleteButton && (
         <button
           className={css.deleteButton}

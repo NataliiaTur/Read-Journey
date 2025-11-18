@@ -67,7 +67,7 @@ const LibraryDashboard = ({
     <div className={css.libraryDashboard}>
       {/* Add Book Form */}
       <div className={css.addBookBlock}>
-        <h2 className={css.title}>Create your library:</h2>
+        <h2 className={css.title}>Filters:</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
           <div className={css.inputWrapper}>
@@ -96,52 +96,31 @@ const LibraryDashboard = ({
             )}
           </div>
 
-          <div className={css.inputWrapper}>
-            <label className={css.label}>Number of pages:</label>
-            <input
-              type="number"
-              placeholder="0"
-              className={css.input}
-              {...register("totalPages")}
-            />
-            {errors.totalPages && (
-              <span className={css.error}>{errors.totalPages.message}</span>
-            )}
-          </div>
-
           <Button type="submit" disabled={isLoading} className={css.addButton}>
             {isLoading ? "Adding..." : "Add book"}
           </Button>
         </form>
-      </div>
 
-      {/* Recommended Books */}
-      <div className={css.recommendedBlock}>
-        <h3 className={css.recommendedTitle}>Recommended books</h3>
+        {/* Recommended Books */}
+        <div className={css.recommendedBlock}>
+          <h3 className={css.recommendedTitle}>Recommended books</h3>
 
-        <div className={css.recommendedList}>
-          {recommendedBooks.map((book) => (
-            <BookCard
-              key={book._id}
-              book={book}
-              onClick={() => onRecommendedBookClick(book)}
-            />
-          ))}
+          <div className={css.recommendedList}>
+            {recommendedBooks.map((book) => (
+              <BookCard
+                key={book._id}
+                book={book}
+                onClick={() => onRecommendedBookClick(book)}
+                className={css.libraryImgBook}
+              />
+            ))}
+          </div>
+
+          <a href="/recommended" className={css.homeLink}>
+            <span>Home</span>
+            <Icon name="chevron-right" className={css.arrowIcon} />
+          </a>
         </div>
-
-        <a href="/recommended" className={css.homeLink}>
-          <span>Home</span>
-          <Icon name="chevron-right" className={css.arrowIcon} />
-        </a>
-      </div>
-
-      {/* Quote Block */}
-      <div className={css.quoteBlock}>
-        <Icon name="book" className={css.quoteIcon} />
-        <p className={css.quoteText}>
-          "Books are <span className={css.highlight}>windows</span> to the
-          world"
-        </p>
       </div>
     </div>
   );
