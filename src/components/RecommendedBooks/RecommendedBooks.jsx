@@ -10,16 +10,9 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
   const filters = useSelector(selectFilters);
   const limit = 10;
 
-  console.log("=== RECOMMENDED BOOKS RENDER ===");
-  console.log("Current filters:", filters);
-  console.log("Current page:", currentPage);
-
   // ✅ Додаємо debounce для фільтрів
   const debouncedTitle = useDebounce(filters.title, 500);
   const debouncedAuthor = useDebounce(filters.author, 500);
-
-  console.log("Debounced title:", debouncedTitle);
-  console.log("Debounced author:", debouncedAuthor);
 
   const { data, isLoading, error, isFetching } = useGetRecommendedBooksQuery({
     page: currentPage,
@@ -27,8 +20,6 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
     title: debouncedTitle,
     author: debouncedAuthor,
   });
-
-  console.log("Query result:", { data, isLoading, error, isFetching });
 
   const handlePrevPage = () => {
     if (currentPage > 1) {

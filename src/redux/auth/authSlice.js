@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   user: null,
-  token: localStorage.getItem("token") || null,
+  token: null,
   isLoggedIn: false,
   isRefreshing: false,
   isLoading: false,
@@ -103,3 +103,4 @@ export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectIsRefreshing = (state) => state.auth.isRefreshing;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectError = (state) => state.auth.error;
+export const selectToken = (state) => state.auth.token;

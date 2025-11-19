@@ -10,12 +10,33 @@ function PrivateRoute({ children }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
 
+  console.log("🔒 PrivateRoute check:", { isLoggedIn, isRefreshing });
+
   // Якщо йде перевірка токена - не редіректимо
   if (isRefreshing) {
-    return null;
+    console.log("⏳ PrivateRoute: showing loading");
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          background: "#141414",
+          color: "#F9F9F9",
+        }}
+      >
+        Loading...
+      </div>
+    );
   }
 
-  // Якщо не авторизований - редірект на login
+  if (!isLoggedIn) {
+    console.log("❌ PrivateRoute: not logged in, redirecting to /login");
+  } else {
+    console.log("✅ PrivateRoute: logged in, rendering children");
+  }
+
   return isLoggedIn ? children : <Navigate to="/login" replace />;
 }
 

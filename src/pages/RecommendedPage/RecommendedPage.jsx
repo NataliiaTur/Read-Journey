@@ -16,7 +16,6 @@ const RecommendedPage = () => {
 
   useEffect(() => {
     return () => {
-      console.log("Leaving Recommended Page - clearing filters");
       dispatch(clearFilters());
     };
   }, [dispatch]);
@@ -40,7 +39,6 @@ const RecommendedPage = () => {
 
   // ✅ Callback для скидання пагінації
   const handleFiltersApply = () => {
-    console.log("Filters applied, resetting to page 1");
     setCurrentPage(1);
   };
 

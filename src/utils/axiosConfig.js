@@ -1,4 +1,5 @@
 import axios from "axios";
+import { store } from "../redux/store";
 
 // Базовий URL API
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -14,7 +15,8 @@ export const api = axios.create({
 // Interceptor для додавання токена до кожного запиту
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = store.getState().auth.token;
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -48,17 +50,10 @@ api.interceptors.response.use(
           }
         );
 
-        // Зберігаємо новий токен
-        localStorage.setItem("token", data.token);
-
         // Повторюємо оригінальний запит з новим токеном
         originalRequest.headers.Authorization = `Bearer ${data.token}`;
         return api(originalRequest);
       } catch (refreshError) {
-        // Якщо оновлення токена не вдалося - виходимо
-        localStorage.removeItem("token");
-        localStorage.removeItem("refreshToken");
-        window.location.href = "/login";
         return Promise.reject(refreshError);
       }
     }

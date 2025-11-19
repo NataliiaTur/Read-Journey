@@ -2,7 +2,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../redux/auth/authOperations";
-import { selectIsLoggedIn, selectIsRefreshing } from "../redux/auth/authSlice";
+import {
+  selectIsLoggedIn,
+  selectIsRefreshing,
+  selectToken,
+} from "../redux/auth/authSlice";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import MainLayout from "@components/MainLayout/MainLayout";
@@ -21,17 +25,22 @@ const AppRoutes = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
+  const token = useSelector(selectToken);
+
+  console.log("🔍 AppRoutes render:", { token, isLoggedIn, isRefreshing });
 
   // Перевіряємо токен при завантаженні додатку
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    console.log("🔄 AppRoutes useEffect:", { token, isLoggedIn });
     if (token && !isLoggedIn) {
+      console.log("📞 Dispatching getCurrentUser");
       dispatch(getCurrentUser());
     }
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch, token, isLoggedIn]);
 
   // Показуємо loader поки перевіряємо токен
   if (isRefreshing) {
+    console.log("⏳ Showing loading state");
     return (
       <div
         style={{
@@ -47,7 +56,7 @@ const AppRoutes = () => {
       </div>
     );
   }
-
+  console.log("✅ Rendering routes");
   return (
     <Routes>
       {/* Публічні роути */}
