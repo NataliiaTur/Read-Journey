@@ -12,6 +12,7 @@ import BookCard from "../BookCard/BookCard";
 import { useEffect } from "react";
 import { useMemo } from "react";
 import css from "./LibraryDashboard.module.css";
+import FloatingLabelInput from "../FloatingLabelInput/FloatingLabelInput.jsx";
 
 const LibraryDashboard = ({
   onRecommendedBookClick,
@@ -73,7 +74,7 @@ const LibraryDashboard = ({
       <div className={css.addBookBlock}>
         <h2 className={css.title}>Create your library:</h2>
         <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-          <div className={css.inputWrapper}>
+          {/* <div className={css.inputWrapper}>
             <label className={css.label}>Book title:</label>
             <input
               type="text"
@@ -110,7 +111,32 @@ const LibraryDashboard = ({
             {errors.totalPages && (
               <span className={css.error}>{errors.totalPages.message}</span>
             )}
-          </div>
+          </div> */}
+
+          <FloatingLabelInput
+            id="title"
+            labelName="Book title"
+            placeholder="Enter text"
+            register={register}
+            error={errors.title}
+          />
+
+          <FloatingLabelInput
+            id="author"
+            labelName="The author"
+            placeholder="Enter text"
+            register={register}
+            error={errors.author}
+          />
+
+          <FloatingLabelInput
+            id="totalPages"
+            labelName="Number of pages"
+            placeholder="0"
+            type="number"
+            register={register}
+            error={errors.totalPages}
+          />
 
           <Button type="submit" disabled={isLoading} className={css.addButton}>
             {isLoading ? "Adding..." : "Add book"}

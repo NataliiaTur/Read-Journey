@@ -1,0 +1,126 @@
+.formGroup {
+  margin-bottom: 8px;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.formInput {
+  width: 100%;
+  padding: 16px 14px;
+  background-color: var(--color-bg-tertiary);
+  border: none;
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 133%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  transition: padding 0.2s ease;
+}
+
+.formInput:hover {
+  border: 1px solid rgba(249, 249, 249, 0.1);
+}
+
+.formInput:focus,
+.formInput:not(:placeholder-shown) {
+  outline: none;
+}
+
+.formInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.formInputError {
+  border: 1px solid var(--color-error);
+}
+
+.formInputSuccess {
+  border: 1px solid #30b94d;
+}
+
+.formSuccess {
+  color: #30b94d;
+}
+
+/* Специфічний padding для кожного поля при фокусі/заповненні */
+.formGroup[data-field="email"] .formInput:focus,
+.formGroup[data-field="email"] .formInput:not(:placeholder-shown) {
+  outline: none;
+  padding-left: 52px; /* 14px + 38px (Mail:) + 10px */
+}
+
+.formGroup[data-field="password"] .formInput:focus,
+.formGroup[data-field="password"] .formInput:not(:placeholder-shown) {
+  outline: none;
+  padding-left: 90px; /* 14px + 76px (Password:) + 10px */
+}
+
+.placeholderLabel {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  gap: 10px;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+}
+
+.labelName {
+  color: #686868;
+}
+
+.labelValue {
+  color: #f9f9f9;
+  transition: opacity 0.2s ease;
+}
+
+/* приховуємо тільки підказку при фокусі або коли інпут заповнений */
+.formInput:focus + .placeholderLabel .labelValue,
+.formInput:not(:placeholder-shown) + .placeholderLabel .labelValue {
+  opacity: 0;
+}
+
+.formError {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--color-error);
+}
+
+/* Title — 79px */
+.formGroup[data-field="title"] .formInput {
+  padding-left: 79px !important;
+}
+
+/* Author — 92px */
+.formGroup[data-field="author"] .formInput {
+  padding-left: 92px !important;
+}
+
+/* Pages — 128px */
+.formGroup[data-field="totalPages"] .formInput {
+  padding-left: 128px !important;
+}
+
+@media screen and (min-width: 768px) {
+  .formInput {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .formInput {
+    font-size: 14px;
+    line-height: 129%;
+    letter-spacing: -0.02em;
+  }
+}

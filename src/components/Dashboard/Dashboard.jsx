@@ -10,6 +10,7 @@ import {
 import { Button } from "@components/Button/Button.jsx";
 import Icon from "@components/Icon/Icon.jsx";
 import css from "./Dashboard.module.css";
+import FloatingLabelInput from "../FloatingLabelInput/FloatingLabelInput.jsx";
 
 const Dashboard = ({ type, onFiltersApply }) => {
   const dispatch = useDispatch();
@@ -26,18 +27,13 @@ const Dashboard = ({ type, onFiltersApply }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log("=== FORM SUBMITTED ===");
-    console.log("Form data:", data);
-
     dispatch(setFilters(data));
-    console.log("Filters set in Redux");
 
     if (onFiltersApply) {
       onFiltersApply();
     }
 
     setTimeout(() => {
-      console.log("Resetting filters after search");
       reset({ title: "", author: "" });
     }, 500);
   };
@@ -50,7 +46,7 @@ const Dashboard = ({ type, onFiltersApply }) => {
           {" "}
           <h2 className={css.title}>Filters</h2>
           <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-            <div className={css.inputWrapper}>
+            {/* <div className={css.inputWrapper}>
               <label htmlFor="title" className={css.label}>
                 Book title:
               </label>
@@ -64,9 +60,16 @@ const Dashboard = ({ type, onFiltersApply }) => {
               {errors.title && (
                 <span className={css.error}>{errors.title.message}</span>
               )}
-            </div>
+            </div> */}
+            <FloatingLabelInput
+              id="title"
+              labelName="Book title"
+              placeholder="Enter text"
+              register={register}
+              error={errors.title}
+            />
 
-            <div className={css.inputWrapper}>
+            {/* <div className={css.inputWrapper}>
               <label htmlFor="author" className={css.label}>
                 The author:
               </label>
@@ -80,7 +83,15 @@ const Dashboard = ({ type, onFiltersApply }) => {
               {errors.author && (
                 <span className={css.error}>{errors.author.message}</span>
               )}
-            </div>
+            </div> */}
+            <FloatingLabelInput
+              id="author"
+              labelName="The author"
+              placeholder="Enter text"
+              register={register}
+              error={errors.author}
+            />
+
             <Button type="submit" className={css.applyButton}>
               To apply
             </Button>
