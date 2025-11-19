@@ -10,6 +10,7 @@ import { Button } from "../Button/Button.jsx";
 import Icon from "../Icon/Icon";
 import BookCard from "../BookCard/BookCard";
 import { useEffect } from "react";
+import { useMemo } from "react";
 import css from "./LibraryDashboard.module.css";
 
 const LibraryDashboard = ({
@@ -19,9 +20,12 @@ const LibraryDashboard = ({
 }) => {
   const [addNewBook, { isLoading }] = useAddNewBookMutation();
 
+  // ✅ Генеруємо випадкову сторінку (1-10) при кожному mount
+  const randomPage = useMemo(() => Math.floor(Math.random() * 10) + 1, []);
+
   // Отримуємо 3 рекомендовані книги
   const { data: recommendedData } = useGetRecommendedBooksQuery({
-    page: 1,
+    page: randomPage,
     limit: 3,
   });
 
