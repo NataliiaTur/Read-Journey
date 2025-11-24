@@ -1,102 +1,11 @@
-// import { useEffect } from "react";
-// import { useAddBookToLibraryMutation } from "@redux/books/booksApi.js";
-// import { showErrorNotification } from "@utils/notifications.jsx";
-// import { Button } from "../Button/Button.jsx";
-// import Icon from "../Icon/Icon.jsx";
-// import css from "./BookModal.module.css";
-
-// const BookModal = ({ book, onClose, onSuccess }) => {
-//   const [addBookToLibrary, { isLoading }] = useAddBookToLibraryMutation();
-
-//   // Закриття по ESC
-//   useEffect(() => {
-//     const handleEscape = (e) => {
-//       if (e.key === "Escape") {
-//         onClose();
-//       }
-//     };
-
-//     document.addEventListener("keydown", handleEscape);
-//     document.body.style.overflow = "hidden";
-
-//     return () => {
-//       document.removeEventListener("keydown", handleEscape);
-//       document.body.style.overflow = "unset";
-//     };
-//   }, [onClose]);
-
-//   // Закриття по backdrop
-//   const handleBackdropClick = (e) => {
-//     if (e.target === e.currentTarget) {
-//       onClose();
-//     }
-//   };
-
-//   const handleAddToLibrary = async () => {
-//     try {
-//       await addBookToLibrary(book._id).unwrap();
-//       // ✅ Викликаємо onSuccess замість закриття
-//       if (onSuccess) {
-//         onSuccess();
-//       } else {
-//         onClose();
-//       }
-//     } catch (error) {
-//       showErrorNotification(
-//         error?.data?.message || "Failed to add book to library"
-//       );
-//     }
-//   };
-
-//   return (
-//     <div className={css.backdrop} onClick={handleBackdropClick}>
-//       <div className={css.modal}>
-//         <button
-//           className={css.closeButton}
-//           onClick={onClose}
-//           aria-label="Close modal"
-//         >
-//           <Icon name="x" className={css.closeIcon} />
-//         </button>
-
-//         <div className={css.imageWrapper}>
-//           {book.imageUrl ? (
-//             <img
-//               src={book.imageUrl}
-//               alt={book.title}
-//               className={css.bookImage}
-//             />
-//           ) : (
-//             <div className={css.placeholderImage}>No Image</div>
-//           )}
-//         </div>
-
-//         <h2 className={css.title}>{book.title}</h2>
-//         <p className={css.author}>{book.author}</p>
-//         <p className={css.pages}>{book.totalPages} pages</p>
-
-//         <Button
-//           onClick={handleAddToLibrary}
-//           disabled={isLoading}
-//           className={css.addButton}
-//         >
-//           {isLoading ? "Adding..." : "Add to library"}
-//         </Button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BookModal;
-
-// src/components/BookModal/BookModal.jsx
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddBookToLibraryMutation } from "@redux/books/booksApi.js";
 import { showErrorNotification } from "@utils/notifications.jsx";
 import { Button } from "../Button/Button.jsx";
 import Icon from "../Icon/Icon.jsx";
-import styles from "./BookModal.module.css";
+import withoutPoster from "@assets/images/withoutPoster1xDesc.webp";
+import css from "./BookModal.module.css";
 
 const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
   const navigate = useNavigate();
@@ -147,43 +56,47 @@ const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
   };
 
   return (
-    <div className={styles.backdrop} onClick={handleBackdropClick}>
-      <div className={styles.modal}>
+    <div className={css.backdrop} onClick={handleBackdropClick}>
+      <div className={css.modal}>
         <button
-          className={styles.closeButton}
+          className={css.closeButton}
           onClick={onClose}
           aria-label="Close modal"
         >
-          <Icon name="x" className={styles.closeIcon} />
+          <Icon name="x" className={css.closeIcon} />
         </button>
 
-        <div className={styles.imageWrapper}>
+        <div className={css.imageWrapper}>
           {book.imageUrl ? (
             <img
               src={book.imageUrl}
               alt={book.title}
-              className={styles.bookImage}
+              className={css.bookImage}
             />
           ) : (
-            <div className={styles.placeholderImage}>No Image</div>
+            <img
+              src={withoutPoster}
+              alt="No poster available"
+              className={css.bookImage}
+            />
           )}
         </div>
 
-        <h2 className={styles.title}>{book.title}</h2>
-        <p className={styles.author}>{book.author}</p>
-        <p className={styles.pages}>{book.totalPages} pages</p>
+        <h2 className={css.title}>{book.title}</h2>
+        <p className={css.author}>{book.author}</p>
+        <p className={css.pages}>{book.totalPages} pages</p>
 
         {/* ✅ Показуємо різні кнопки залежно від mode */}
         {mode === "recommended" ? (
           <Button
             onClick={handleAddToLibrary}
             disabled={isLoading}
-            className={styles.actionButton}
+            className={css.actionButton}
           >
             {isLoading ? "Adding..." : "Add to library"}
           </Button>
         ) : (
-          <Button onClick={handleStartReading} className={styles.actionButton}>
+          <Button onClick={handleStartReading} className={css.actionButton}>
             Start reading
           </Button>
         )}

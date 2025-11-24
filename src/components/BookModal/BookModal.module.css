@@ -4,13 +4,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(20, 20, 20, 0.8);
+  background-color: rgba(31, 31, 31, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 20px;
-  backdrop-filter: blur(4px);
 }
 
 .modal {
@@ -77,8 +76,7 @@
   height: 100%;
   /* object-fit: cover; */
 }
-
-.placeholderImage {
+/* .placeholderImage {
   width: 100%;
   height: 100%;
   display: flex;
@@ -86,7 +84,7 @@
   justify-content: center;
   color: rgba(249, 249, 249, 0.3);
   font-size: 14px;
-}
+} */
 
 .title {
   font-size: 18px;
@@ -110,6 +108,7 @@
 }
 
 .pages {
+  font-weight: 500;
   font-size: 10px;
   line-height: 120%;
   letter-spacing: -0.02em;
@@ -118,7 +117,7 @@
   margin: 0 0 20px;
 }
 
-.addButton {
+.actionButton {
   border: 1px solid rgba(249, 249, 249, 0.2);
   border-radius: 30px;
   padding: 12px 24px;
@@ -167,9 +166,9 @@
     margin: 0 0 32px;
   }
 
-  .addButton {
+  .actionButton {
     padding: 14px 28px;
-    width: 162px;
+    width: 159px;
     height: 46px;
     font-size: 16px;
     line-height: 112%;
@@ -179,18 +178,5 @@
 @media screen and (min-width: 1440px) {
   .modal {
     padding: 50px;
-  }
-
-  .title {
-    margin-bottom: 2px;
-  }
-
-  .author {
-    font-size: 20px;
-    margin: 0 0 4px;
-  }
-
-  .pages {
-    font-size: 10px;
   }
 }
