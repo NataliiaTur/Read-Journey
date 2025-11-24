@@ -1,5 +1,6 @@
 import css from "./BookCard.module.css";
 import Icon from "../Icon/Icon.jsx";
+import withoutPoster from "@assets/images/withoutPoster1xDesc.webp";
 
 const BookCard = ({
   book,
@@ -32,9 +33,11 @@ const BookCard = ({
         {imageUrl ? (
           <img src={imageUrl} alt={title} className={css.bookImage} />
         ) : (
-          <div className={css.placeholderImage}>
-            <span>No Image</span>
-          </div>
+          <img
+            src={withoutPoster}
+            alt="No poster available"
+            className={css.bookImage}
+          />
         )}
       </div>
 

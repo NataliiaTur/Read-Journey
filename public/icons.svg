@@ -64,5 +64,11 @@
   <path stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M13.333 14.667v8" fill="none"/>
   <path stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M18.667 14.667v8" fill="none"/>
 </symbol>
+<symbol id="icon-thumbs-up" viewBox="0 0 36 36">
+  <path fill="#FFCC4D" d="M34 17c0-2.209-1.791-4-4-4h-8c1.104 0 2-1.119 2-2.5S23.104 8 22 8h-1.5c.827 0 1.5-1.343 1.5-3s-.673-4-3-4-3 2.343-3 4c0 2.091-.293 3.268-.852 4.398-.41.809-.99 1.495-1.648 2.057C11.16 13.22 10 14.763 10 17v13c0 3 2 5 5 5h10c2.209 0 4-1.791 4-4 0-1.306-.626-2.462-1.588-3.211C29.719 27.325 30 26.691 30 26c0-.896-.391-1.701-1.016-2.267C30.309 23.295 31 22.218 31 21c0-.838-.266-1.61-.717-2.243C32.266 18.379 34 17 34 17z"/>
+  <path fill="#664500" d="M8 16H2c-.552 0-1 .448-1 1v15c0 .552.448 1 1 1h6c.552 0 1-.448 1-1V17c0-.552-.448-1-1-1z"/>
+</symbol>
+
+
   </defs>
 </svg>

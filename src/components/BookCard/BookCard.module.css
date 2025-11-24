@@ -28,17 +28,6 @@
   height: 100%;
 }
 
-.placeholderImage {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #262626 0%, #1f1f1f 100%);
-  color: rgba(249, 249, 249, 0.3);
-  font-size: 14px;
-}
-
 /* ✅ Обгортка для тексту + кнопки видалення */
 .bookInfoWrapper {
   display: flex;

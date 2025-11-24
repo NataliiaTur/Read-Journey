@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import Icon from "../Icon/Icon.jsx";
-import ThumbsUp from "../../assets/icons/thumbs-up.svg?react";
 import css from "./AddBookSuccessModal.module.css";
 
 const AddBookSuccessModal = ({ onClose }) => {
@@ -39,7 +38,7 @@ const AddBookSuccessModal = ({ onClose }) => {
 
         <div className={css.iconWrapper}>
           <div className={css.thumbsUp}>
-            <ThumbsUp />
+            <Icon name="thumbs-up" className={css.iconThumbsUp} />
           </div>
         </div>
 
