@@ -1,16 +1,46 @@
-.formGroup {
+/* Анімація для детекції autofill */
+@keyframes onAutoFillStart {
+  from {
+    /*dummy*/
+  }
+  to {
+    /*dummy*/
+  }
+}
+
+@keyframes onAutoFillCancel {
+  from {
+    /*dummy*/
+  }
+  to {
+    /*dummy*/
+  }
+}
+
+.formInputFloat:-webkit-autofill {
+  animation-name: onAutoFillStart;
+  animation-duration: 0.001s;
+}
+
+.formInputFloat:not(:-webkit-autofill) {
+  animation-name: onAutoFillCancel;
+  animation-duration: 0.001s;
+}
+
+/* ====== */
+.formGroupFloat {
   margin-bottom: 8px;
 }
 
-.inputWrapper {
+.inputWrapperFloat {
   position: relative;
   width: 100%;
 }
 
-.formInput {
+.formInputFloat {
   width: 100%;
   padding: 16px 14px;
-  background-color: var(--color-bg-tertiary);
+  background-color: #262626;
   border: none;
   border-radius: 12px;
   position: relative;
@@ -23,46 +53,46 @@
   transition: padding 0.2s ease;
 }
 
-.formInput:hover {
+.formInputFloat:hover {
   border: 1px solid rgba(249, 249, 249, 0.1);
 }
 
-.formInput:focus,
-.formInput:not(:placeholder-shown) {
+.formInputFloat:focus,
+.formInputFloat:not(:placeholder-shown) {
   outline: none;
 }
 
-.formInput:disabled {
+.formInputFloat:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.formInputError {
+.formInputErrorFloat {
   border: 1px solid var(--color-error);
 }
 
-.formInputSuccess {
+.formInputSuccessFloat {
   border: 1px solid #30b94d;
 }
 
-.formSuccess {
+.formSuccessFloat {
   color: #30b94d;
 }
 
 /* Специфічний padding для кожного поля при фокусі/заповненні */
-.formGroup[data-field="email"] .formInput:focus,
-.formGroup[data-field="email"] .formInput:not(:placeholder-shown) {
+.formGroupFloat[data-field="email"] .formInputFloat:focus,
+.formGroupFloat[data-field="email"] .formInputFloat:not(:placeholder-shown) {
   outline: none;
   padding-left: 52px; /* 14px + 38px (Mail:) + 10px */
 }
 
-.formGroup[data-field="password"] .formInput:focus,
-.formGroup[data-field="password"] .formInput:not(:placeholder-shown) {
+.formGroupFloat[data-field="password"] .formInputFloat:focus,
+.formGroupFloat[data-field="password"] .formInputFloat:not(:placeholder-shown) {
   outline: none;
   padding-left: 90px; /* 14px + 76px (Password:) + 10px */
 }
 
-.placeholderLabel {
+.placeholderLabelFloat {
   position: absolute;
   top: 50%;
   left: 14px;
@@ -74,22 +104,24 @@
   z-index: 2;
 }
 
-.labelName {
+.labelNameFloat {
   color: #686868;
 }
 
-.labelValue {
+.labelValueFloat {
   color: #f9f9f9;
   transition: opacity 0.2s ease;
 }
 
-/* приховуємо тільки підказку при фокусі або коли інпут заповнений */
-.formInput:focus + .placeholderLabel .labelValue,
-.formInput:not(:placeholder-shown) + .placeholderLabel .labelValue {
+/* приховуємо підказку при фокусі або коли інпут заповнений */
+.formInputFloat:focus + .placeholderLabelFloat .labelValueFloat,
+.formInputFloat:not(:placeholder-shown)
+  + .placeholderLabelFloat
+  .labelValueFloat {
   opacity: 0;
 }
 
-.formError {
+.formErrorFloat {
   display: block;
   margin-top: 4px;
   font-size: 12px;
@@ -97,28 +129,57 @@
 }
 
 /* Title — 79px */
-.formGroup[data-field="title"] .formInput {
-  padding-left: 79px !important;
+.formGroupFloat[data-field="title"] .formInputFloat {
+  padding-left: 79px;
 }
 
 /* Author — 92px */
-.formGroup[data-field="author"] .formInput {
-  padding-left: 92px !important;
+.formGroupFloat[data-field="author"] .formInputFloat {
+  padding-left: 92px;
 }
 
 /* Pages — 128px */
-.formGroup[data-field="totalPages"] .formInput {
-  padding-left: 128px !important;
+.formGroupFloat[data-field="totalPages"] .formInputFloat {
+  padding-left: 128px;
+}
+
+/* 1) Перезаписати стилі браузерного autofill (Chrome/WebKit) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f9f9f9 !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+  -webkit-box-shadow: 0 0 0px 1000px #262626 inset !important;
+  box-shadow: 0 0 0px 1000px #262626 inset !important;
+  background-color: #262626 !important;
+}
+
+/* 2) Коли браузер застосував autofill, приховаємо внутрішній labelValue */
+input:-webkit-autofill + .placeholderLabelFloat .labelValueFloat,
+input:-webkit-autofill:focus + .placeholderLabelFloat .labelValueFloat {
+  opacity: 0 !important;
+}
+
+/* 3) Клас filledFloat — якщо інпут має value (JS встановив) */
+.formGroupFloat.filledFloat .placeholderLabelFloat .labelValueFloat {
+  opacity: 0;
+}
+
+/* Додатково — сховати labelValue якщо інпут має value (поза :placeholder-shown) */
+.formInputFloat:not(:placeholder-shown)
+  + .placeholderLabelFloat
+  .labelValueFloat {
+  opacity: 0;
 }
 
 @media screen and (min-width: 768px) {
-  .formInput {
+  .formInputFloat {
     font-size: 14px;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .formInput {
+  .formInputFloat {
     font-size: 14px;
     line-height: 129%;
     letter-spacing: -0.02em;

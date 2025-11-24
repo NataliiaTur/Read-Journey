@@ -14,7 +14,7 @@
 .formInput {
   width: 100%;
   padding: 16px 14px;
-  background-color: var(--color-bg-tertiary);
+  background-color: #262626;
   border: none;
   border-radius: 12px;
   position: relative;
