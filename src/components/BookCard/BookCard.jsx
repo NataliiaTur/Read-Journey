@@ -1,5 +1,5 @@
 import css from "./BookCard.module.css";
-import Icon from "../Icon/Icon";
+import Icon from "../Icon/Icon.jsx";
 
 const BookCard = ({
   book,
@@ -28,16 +28,6 @@ const BookCard = ({
       className={`${css.bookCard} ${className || ""}`}
       onClick={handleCardClick}
     >
-      {showDeleteButton && (
-        <button
-          className={css.deleteButton}
-          onClick={handleDeleteClick}
-          aria-label="Delete book"
-        >
-          <Icon name="trash" className={css.trashIcon} />
-        </button>
-      )}
-
       <div className={css.imageWrapper}>
         {imageUrl ? (
           <img src={imageUrl} alt={title} className={css.bookImage} />
@@ -48,9 +38,30 @@ const BookCard = ({
         )}
       </div>
 
-      <div className={css.bookInfo}>
-        <h3 className={css.bookTitle}>{title}</h3>
-        <p className={css.bookAuthor}>{author}</p>
+      <div className={css.bookInfoWrapper}>
+        <div
+          className={`${css.bookInfo} ${
+            showDeleteButton ? css.bookInfoWithDelete : ""
+          }`}
+        >
+          <h3 className={css.bookTitle}>{title}</h3>
+          <p className={css.bookAuthor}>{author}</p>
+        </div>
+
+        {showDeleteButton && (
+          <button
+            className={css.deleteButton}
+            onClick={handleDeleteClick}
+            aria-label="Delete book"
+          >
+            <Icon
+              name="trash"
+              className={css.trashIcon}
+              size={16}
+              style={{ stroke: "#e85050", fill: "none" }}
+            />
+          </button>
+        )}
       </div>
     </div>
   );

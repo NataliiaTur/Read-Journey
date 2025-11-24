@@ -1,7 +1,6 @@
 .icon {
-  display: inline-block;
-  color: inherit;
-  fill: currentColor;
+  display: block;
+  fill: none;
   stroke: currentColor;
   flex-shrink: 0;
 }

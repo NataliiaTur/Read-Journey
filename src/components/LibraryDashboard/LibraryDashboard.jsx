@@ -21,14 +21,24 @@ const LibraryDashboard = ({
 }) => {
   const [addNewBook, { isLoading }] = useAddNewBookMutation();
 
-  // ✅ Генеруємо випадкову сторінку (1-10) при кожному mount
-  const randomPage = useMemo(() => Math.floor(Math.random() * 10) + 1, []);
-
-  // Отримуємо 3 рекомендовані книги
+  // ✅ Завжди запитуємо 10 книг з 1-ї сторінки
   const { data: recommendedData } = useGetRecommendedBooksQuery({
-    page: randomPage,
-    limit: 3,
+    page: 1,
+    limit: 10,
   });
+
+  // ✅ Вибираємо 3 випадкові книги з отриманих
+  const recommendedBooks = useMemo(() => {
+    const allBooks = recommendedData?.results || [];
+
+    if (allBooks.length <= 3) {
+      return allBooks; // Якщо <= 3, повертаємо всі
+    }
+
+    // Вибираємо 3 випадкові книги
+    const shuffled = [...allBooks].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 3);
+  }, [recommendedData]);
 
   const {
     register,
@@ -66,53 +76,12 @@ const LibraryDashboard = ({
     }
   };
 
-  const recommendedBooks = recommendedData?.results?.slice(0, 3) || [];
-
   return (
     <div className={css.libraryDashboard}>
       {/* Add Book Form */}
       <div className={css.addBookBlock}>
         <h2 className={css.title}>Create your library:</h2>
         <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-          {/* <div className={css.inputWrapper}>
-            <label className={css.label}>Book title:</label>
-            <input
-              type="text"
-              placeholder="Enter text"
-              className={css.input}
-              {...register("title")}
-            />
-            {errors.title && (
-              <span className={css.error}>{errors.title.message}</span>
-            )}
-          </div>
-
-          <div className={css.inputWrapper}>
-            <label className={css.label}>The author:</label>
-            <input
-              type="text"
-              placeholder="Enter text"
-              className={css.input}
-              {...register("author")}
-            />
-            {errors.author && (
-              <span className={css.error}>{errors.author.message}</span>
-            )}
-          </div>
-
-          <div className={css.inputWrapper}>
-            <label className={css.label}>Number of pages:</label>
-            <input
-              type="number"
-              placeholder="0"
-              className={css.input}
-              {...register("totalPages")}
-            />
-            {errors.totalPages && (
-              <span className={css.error}>{errors.totalPages.message}</span>
-            )}
-          </div> */}
-
           <FloatingLabelInput
             id="title"
             labelName="Book title"

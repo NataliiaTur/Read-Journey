@@ -3,6 +3,7 @@ import css from "./LibraryPage.module.css";
 import LibraryDashboard from "@components/LibraryDashboard/LibraryDashboard.jsx";
 import MyLibraryBooks from "@components/MyLibraryBooks/MyLibraryBooks.jsx";
 import BookModal from "@components/BookModal/BookModal.jsx";
+import AddBookSuccessModal from "@components/AddBookSuccessModal/AddBookSuccessModal.jsx";
 
 const LibraryPage = () => {
   const [selectedBook, setSelectedBook] = useState(null);

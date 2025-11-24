@@ -55,6 +55,7 @@ const RecommendedPage = () => {
           book={selectedBook}
           onClose={handleCloseModal}
           onSuccess={handleBookAdded}
+          mode="recommended"
         />
       )}
       {showSuccessModal && <SuccessModal onClose={handleCloseSuccessModal} />}

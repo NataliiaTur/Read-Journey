@@ -19,9 +19,6 @@ const MyLibraryBooks = ({ onBookClick }) => {
     filter === "All books" ? undefined : filter
   );
 
-  console.log("📚 MyLibraryBooks data:", data);
-  console.log("📚 Filter:", filter);
-
   const [removeBook] = useRemoveBookMutation();
 
   const handleFilterChange = (newFilter) => {
@@ -61,8 +58,6 @@ const MyLibraryBooks = ({ onBookClick }) => {
   }
 
   const books = Array.isArray(data) ? data : data?.results || [];
-  console.log("📚 Books array:", books);
-  console.log("📚 Books length:", books.length);
 
   return (
     <div className={css.myLibraryBooks}>

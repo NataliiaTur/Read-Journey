@@ -139,6 +139,11 @@
   background-color: #f9f9f9;
 }
 
+.actionButton {
+  width: 100%;
+  max-width: 300px;
+}
+
 @media screen and (min-width: 768px) {
   .modal {
     width: 500px;
