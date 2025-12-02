@@ -8,7 +8,7 @@ const FloatingLabelInput = ({
   type = "text",
   register,
   error,
-  value,
+  disabled = false,
   autoComplete, // optional prop
 }) => {
   const inputRef = useRef(null);
@@ -37,15 +37,14 @@ const FloatingLabelInput = ({
     const t2 = setTimeout(check, 500);
     const t3 = setTimeout(check, 1000);
 
-    // Також слухаємо подію input, щоб оновити стан коли користувач вводить
     const el = inputRef.current;
     if (el) {
       el.addEventListener("input", check);
-      // ✅ Обробник для autofill
+      // Обробник для autofill
       el.addEventListener("change", check);
     }
 
-    // ✅ Додаємо обробник для animation start (коли браузер застосовує autofill)
+    // Додаємо обробник для animation start (коли браузер застосовує autofill)
     const handleAnimationStart = (e) => {
       if (e.animationName === "onAutoFillStart") {
         check();
@@ -75,12 +74,12 @@ const FloatingLabelInput = ({
           {...reg}
           ref={(node) => {
             inputRef.current = node;
-            // якщо register повернув ref, зберегти його
             if (typeof reg === "object" && reg?.ref) reg.ref(node);
           }}
           type={type}
           id={id}
           placeholder=" "
+          disabled={disabled}
           autoComplete={
             autoComplete || (id === "password" ? "current-password" : id)
           }

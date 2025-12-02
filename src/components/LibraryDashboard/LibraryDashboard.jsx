@@ -2,15 +2,15 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addBookSchema } from "@schemas/validationSchemas.js";
 import {
-  useAddNewBookMutation,
+  useAddBookToLibraryMutation,
   useGetRecommendedBooksQuery,
+  useGetUserBooksQuery,
 } from "../../redux/books/booksApi";
-import { showErrorNotification } from "@utils/notifications.jsx";
+import { showOperationError, handleApiError } from "@utils/notifications.jsx";
 import { Button } from "../Button/Button.jsx";
 import Icon from "../Icon/Icon";
 import BookCard from "../BookCard/BookCard";
-import { useEffect } from "react";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import css from "./LibraryDashboard.module.css";
 import FloatingLabelInput from "../FloatingLabelInput/FloatingLabelInput.jsx";
 
@@ -19,23 +19,17 @@ const LibraryDashboard = ({
   selectedRecommendedBook,
   onBookAdded,
 }) => {
-  const [addNewBook, { isLoading }] = useAddNewBookMutation();
+  const [addBookToLibrary, { isLoading }] = useAddBookToLibraryMutation();
+  const { data: userBooksData } = useGetUserBooksQuery();
 
-  // ✅ Завжди запитуємо 10 книг з 1-ї сторінки
   const { data: recommendedData } = useGetRecommendedBooksQuery({
     page: 1,
     limit: 10,
   });
 
-  // ✅ Вибираємо 3 випадкові книги з отриманих
   const recommendedBooks = useMemo(() => {
     const allBooks = recommendedData?.results || [];
-
-    if (allBooks.length <= 3) {
-      return allBooks; // Якщо <= 3, повертаємо всі
-    }
-
-    // Вибираємо 3 випадкові книги
+    if (allBooks.length <= 3) return allBooks;
     const shuffled = [...allBooks].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, 3);
   }, [recommendedData]);
@@ -64,15 +58,36 @@ const LibraryDashboard = ({
     }
   }, [selectedRecommendedBook, setValue]);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async () => {
+    // Перевіряємо чи обрана книга
+    if (!selectedRecommendedBook?._id) {
+      showOperationError("bookNotSelected");
+      return;
+    }
+
+    const userBooks = Array.isArray(userBooksData)
+      ? userBooksData
+      : userBooksData?.results || [];
+
+    const bookExists = userBooks.some(
+      (book) =>
+        book.title === selectedRecommendedBook.title &&
+        book.author === selectedRecommendedBook.author
+    );
+
+    if (bookExists) {
+      showOperationError("bookAlreadyInLibrary");
+      return;
+    }
     try {
-      await addNewBook(data).unwrap();
+      // Додаємо книгу по ID
+      await addBookToLibrary(selectedRecommendedBook._id).unwrap();
       reset();
       if (onBookAdded) {
         onBookAdded();
       }
     } catch (error) {
-      showErrorNotification(error?.data?.message || "Failed to add book");
+      handleApiError(error);
     }
   };
 
@@ -88,6 +103,7 @@ const LibraryDashboard = ({
             placeholder="Enter text"
             register={register}
             error={errors.title}
+            disabled={true}
           />
 
           <FloatingLabelInput
@@ -96,6 +112,7 @@ const LibraryDashboard = ({
             placeholder="Enter text"
             register={register}
             error={errors.author}
+            disabled={true}
           />
 
           <FloatingLabelInput
@@ -105,13 +122,19 @@ const LibraryDashboard = ({
             type="number"
             register={register}
             error={errors.totalPages}
+            disabled={true}
           />
 
-          <Button type="submit" disabled={isLoading} className={css.addButton}>
+          <Button
+            type="submit"
+            disabled={isLoading || !selectedRecommendedBook} // Disabled якщо не обрана книга
+            className={css.addButton}
+          >
             {isLoading ? "Adding..." : "Add book"}
           </Button>
         </form>
       </div>
+
       {/* Recommended Books */}
       <div className={css.recommendedBlock}>
         <h3 className={css.recommendedTitle}>Recommended books</h3>

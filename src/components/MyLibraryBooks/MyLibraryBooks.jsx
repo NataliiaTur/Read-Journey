@@ -30,9 +30,7 @@ const MyLibraryBooks = ({ onBookClick }) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleDeleteBook = async (bookId, e) => {
-    e.stopPropagation(); // Запобігаємо відкриттю модалки при кліку на delete
-
+  const handleDeleteBook = async (bookId) => {
     try {
       await removeBook(bookId).unwrap();
       showOperationSuccess("bookRemoved");
@@ -141,7 +139,7 @@ const MyLibraryBooks = ({ onBookClick }) => {
               book={book}
               onClick={() => onBookClick(book)}
               showDeleteButton={true}
-              onDelete={(id) => handleDeleteBook(id, event)}
+              onDelete={handleDeleteBook}
             />
           ))}
         </div>

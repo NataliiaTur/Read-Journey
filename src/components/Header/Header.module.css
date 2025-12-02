@@ -1,14 +1,11 @@
-.header {
-  background-color: var(--color-bg-secondary);
-  border-radius: 15px;
-}
-
 .headerContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 57px;
   padding: 0 20px;
+  background-color: var(--color-bg-secondary);
+  border-radius: 15px;
 }
 
 .logoText,

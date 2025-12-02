@@ -41,6 +41,7 @@ export const addBookSchema = Yup.object().shape({
     .min(1, "Book must have at least 1 page")
     .max(10000, "Number of pages seems unrealistic")
     .required("Number of pages is required"),
+  imageUrl: Yup.string().nullable(),
 });
 
 // Filter Books Schema

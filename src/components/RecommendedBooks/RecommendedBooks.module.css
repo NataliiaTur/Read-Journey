@@ -6,8 +6,7 @@
   min-height: 382px;
   display: flex;
   flex-direction: column;
-
-  position: relative; /* ✅ Додаємо це */
+  position: relative;
 }
 
 .header {
@@ -87,6 +86,33 @@
   color: rgba(249, 249, 249, 0.6);
   margin-top: auto;
   padding-top: 20px;
+}
+
+.bookWrapper {
+  position: relative;
+}
+
+.bookInLibrary {
+  opacity: 0.6;
+  pointer-events: none; /* ✅ Вимикаємо клік */
+}
+
+.inLibraryBadge {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(76, 175, 80, 0.9);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 @media screen and (max-width: 767px) {

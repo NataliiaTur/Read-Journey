@@ -2,7 +2,10 @@ import css from "./RecommendedBooks.module.css";
 import { useSelector } from "react-redux";
 import { selectFilters } from "@redux/books/booksSlice.js";
 import { useDebounce } from "@hooks/useDebounce";
-import { useGetRecommendedBooksQuery } from "@redux/books/booksApi.js";
+import {
+  useGetRecommendedBooksQuery,
+  useGetUserBooksQuery,
+} from "@redux/books/booksApi.js";
 import BookCard from "../BookCard/BookCard.jsx";
 import Icon from "../Icon/Icon.jsx";
 
@@ -10,7 +13,6 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
   const filters = useSelector(selectFilters);
   const limit = 10;
 
-  // ✅ Додаємо debounce для фільтрів
   const debouncedTitle = useDebounce(filters.title, 500);
   const debouncedAuthor = useDebounce(filters.author, 500);
 
@@ -20,6 +22,9 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
     title: debouncedTitle,
     author: debouncedAuthor,
   });
+
+  // Отримуємо книги користувача
+  const { data: userBooksData } = useGetUserBooksQuery();
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -64,6 +69,15 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
   const books = data?.results || [];
   const totalPages = data?.totalPages || 1;
 
+  // Створюємо Set з ID книг користувача для швидкої перевірки
+  const userBooks = Array.isArray(userBooksData)
+    ? userBooksData
+    : userBooksData?.results || [];
+
+  const userBookKeys = new Set(
+    userBooks.map((book) => `${book.title}-${book.author}`)
+  );
+
   return (
     <div className={css.recommendedBooks}>
       <div className={css.header}>
@@ -88,7 +102,6 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
         </div>
       </div>
 
-      {/* ✅ Показуємо overlay під час fetching */}
       {isFetching && (
         <div className={css.fetchingOverlay}>
           <div className={css.spinner}></div>
@@ -105,19 +118,28 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
         </div>
       ) : (
         <div className={css.booksList}>
-          {books.map((book) => (
-            <BookCard
-              key={book._id}
-              book={book}
-              onClick={() => onBookClick(book)}
-            />
-          ))}
+          {books.map((book) => {
+            const bookKey = `${book.title}-${book.author}`;
+            const isInLibrary = userBookKeys.has(bookKey);
+
+            return (
+              <div key={book._id} className={css.bookWrapper}>
+                <BookCard
+                  book={book}
+                  onClick={() => onBookClick(book)}
+                  className={isInLibrary ? css.bookInLibrary : ""}
+                />
+                {isInLibrary && (
+                  <div className={css.inLibraryBadge}>
+                    <Icon name="check" size={14} />
+                    <span>In Library</span>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
-
-      {/* <div className={css.pageInfo}>
-        Page {currentPage} of {totalPages}
-      </div> */}
     </div>
   );
 };

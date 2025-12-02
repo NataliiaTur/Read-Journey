@@ -1,17 +1,21 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAddBookToLibraryMutation } from "@redux/books/booksApi.js";
-import { showErrorNotification } from "@utils/notifications.jsx";
-import { Button } from "../Button/Button.jsx";
-import Icon from "../Icon/Icon.jsx";
-import withoutPoster from "@assets/images/withoutPoster1xDesc.webp";
-import css from "./BookModal.module.css";
+import {
+  useAddBookToLibraryMutation,
+  useGetUserBooksQuery,
+} from "../../redux/books/booksApi";
+import { showOperationError, handleApiError } from "../../utils/notifications";
+import { Button } from "../Button/Button";
+import Icon from "../Icon/Icon";
+import styles from "./BookModal.module.css";
 
 const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
   const navigate = useNavigate();
   const [addBookToLibrary, { isLoading }] = useAddBookToLibraryMutation();
 
-  // Закриття по ESC
+  //  Отримуємо список книг користувача
+  const { data: userBooksData } = useGetUserBooksQuery();
+
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape") {
@@ -28,7 +32,6 @@ const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
     };
   }, [onClose]);
 
-  // Закриття по backdrop
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -36,6 +39,21 @@ const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
   };
 
   const handleAddToLibrary = async () => {
+    // Перевіряємо чи книга вже є в бібліотеці
+    const userBooks = Array.isArray(userBooksData)
+      ? userBooksData
+      : userBooksData?.results || [];
+
+    const bookExists = userBooks.some(
+      (userBook) =>
+        userBook.title === book.title && userBook.author === book.author
+    );
+
+    if (bookExists) {
+      showOperationError("bookAlreadyInLibrary");
+      return;
+    }
+
     try {
       await addBookToLibrary(book._id).unwrap();
       if (onSuccess) {
@@ -44,9 +62,7 @@ const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
         onClose();
       }
     } catch (error) {
-      showErrorNotification(
-        error?.data?.message || "Failed to add book to library"
-      );
+      handleApiError(error);
     }
   };
 
@@ -56,47 +72,42 @@ const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
   };
 
   return (
-    <div className={css.backdrop} onClick={handleBackdropClick}>
-      <div className={css.modal}>
+    <div className={styles.backdrop} onClick={handleBackdropClick}>
+      <div className={styles.modal}>
         <button
-          className={css.closeButton}
+          className={styles.closeButton}
           onClick={onClose}
           aria-label="Close modal"
         >
-          <Icon name="x" className={css.closeIcon} />
+          <Icon name="x" className={styles.closeIcon} />
         </button>
 
-        <div className={css.imageWrapper}>
+        <div className={styles.imageWrapper}>
           {book.imageUrl ? (
             <img
               src={book.imageUrl}
               alt={book.title}
-              className={css.bookImage}
+              className={styles.bookImage}
             />
           ) : (
-            <img
-              src={withoutPoster}
-              alt="No poster available"
-              className={css.bookImage}
-            />
+            <div className={styles.placeholderImage}>No Image</div>
           )}
         </div>
 
-        <h2 className={css.title}>{book.title}</h2>
-        <p className={css.author}>{book.author}</p>
-        <p className={css.pages}>{book.totalPages} pages</p>
+        <h2 className={styles.title}>{book.title}</h2>
+        <p className={styles.author}>{book.author}</p>
+        <p className={styles.pages}>{book.totalPages} pages</p>
 
-        {/* ✅ Показуємо різні кнопки залежно від mode */}
         {mode === "recommended" ? (
           <Button
             onClick={handleAddToLibrary}
             disabled={isLoading}
-            className={css.actionButton}
+            className={styles.actionButton}
           >
             {isLoading ? "Adding..." : "Add to library"}
           </Button>
         ) : (
-          <Button onClick={handleStartReading} className={css.actionButton}>
+          <Button onClick={handleStartReading} className={styles.actionButton}>
             Start reading
           </Button>
         )}
