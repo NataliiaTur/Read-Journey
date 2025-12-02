@@ -93,15 +93,15 @@
 }
 
 .bookInLibrary {
-  opacity: 0.6;
+  opacity: 0.7;
   pointer-events: none; /* ✅ Вимикаємо клік */
 }
 
 .inLibraryBadge {
   position: absolute;
-  bottom: 40px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   background: rgba(76, 175, 80, 0.9);
   color: #fff;
   padding: 4px 8px;
