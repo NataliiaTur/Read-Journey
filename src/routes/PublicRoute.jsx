@@ -5,8 +5,6 @@ import { Navigate } from "react-router-dom";
 function PublicRoute({ children }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  console.log("🌍 PublicRoute check:", { isLoggedIn });
-
   if (isLoggedIn) {
     console.log("✅ PublicRoute: logged in, redirecting to /recommended");
     return <Navigate to="/recommended" replace />;

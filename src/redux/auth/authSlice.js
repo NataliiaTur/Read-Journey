@@ -32,8 +32,9 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        const { token, refreshToken, ...userData } = action.payload;
+        state.user = userData;
+        state.token = token;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
@@ -47,8 +48,9 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        const { token, refreshToken, ...userData } = action.payload;
+        state.user = userData;
+        state.token = token;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
