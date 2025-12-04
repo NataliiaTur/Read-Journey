@@ -9,7 +9,7 @@
 
 .title {
   font-weight: 700;
-  font-size: 28px;
+  font-size: 20px;
   line-height: 100%;
   letter-spacing: -0.02em;
   color: #f9f9f9;
@@ -28,7 +28,7 @@
   border-radius: 8px;
   overflow: hidden;
   background: #262626;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .bookImage {
@@ -39,19 +39,19 @@
 
 .bookTitle {
   font-weight: 700;
-  font-size: 18px;
-  line-height: 100%;
+  font-size: 14px;
+  line-height: 129%;
   letter-spacing: -0.02em;
   color: #f9f9f9;
   text-align: center;
-  margin: 0 0 4px;
+  margin: 0 0 5px;
   max-width: 100%;
   overflow-wrap: break-word;
 }
 
 .bookAuthor {
-  font-size: 12px;
-  line-height: 117%;
+  font-size: 10px;
+  line-height: 120%;
   letter-spacing: -0.02em;
   color: #686868;
   text-align: center;
@@ -93,40 +93,45 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #e85050;
+  background-color: #e90516;
 }
 
 /* Stop Icon (червоний квадрат) */
 .stopIcon {
   width: 15px;
   height: 15px;
-  background: #e85050;
+  background-color: #e90516;
   border-radius: 2px;
 }
 
 /* Tablet */
 @media screen and (min-width: 768px) {
   .myBook {
-    padding: 40px;
+    padding: 40px 40px 25px;
   }
 
   .title {
-    font-size: 32px;
-    margin-bottom: 50px;
+    font-size: 28px;
+    line-height: 114%;
+    margin: 0 0 32px;
   }
 
   .imageWrapper {
     width: 169px;
     height: 256px;
+    margin-bottom: 25px;
   }
 
   .bookTitle {
     font-size: 20px;
+    line-height: 100%;
+    margin: 0 0 4px;
   }
 
   .bookAuthor {
     font-size: 14px;
-    margin-bottom: 30px;
+    line-height: 129%;
+    margin: 0 0 16px;
   }
 
   .playButton {
@@ -137,28 +142,50 @@
   .playButtonOuter {
     width: 50px;
     height: 50px;
-    border: 3px solid #f9f9f9;
+    border: 2px solid #f9f9f9;
   }
 
   .playIconInner {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
   }
 
   .stopIcon {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
 }
 
 /* Desktop */
 @media screen and (min-width: 1440px) {
   .myBook {
-    max-width: 847px;
+    padding: 40px 40px 53px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 114%;
+    margin: 0 0 44px;
   }
 
   .imageWrapper {
     width: 224px;
-    height: 340px;
+    height: 304px;
+    margin-bottom: 25px;
+  }
+
+  .bookTitle {
+    line-height: 100%;
+    margin: 0 0 4px;
+  }
+
+  .bookAuthor {
+    margin: 0 0 25px;
+  }
+
+  /* Play Icon (червоне коло) */
+  .playIconInner {
+    width: 40px;
+    height: 40px;
   }
 }
