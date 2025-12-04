@@ -10,6 +10,7 @@ const FloatingLabelInput = ({
   error,
   disabled = false,
   autoComplete, // optional prop
+  className = "",
 }) => {
   const inputRef = useRef(null);
   const groupRef = useRef(null);
@@ -83,7 +84,7 @@ const FloatingLabelInput = ({
           autoComplete={
             autoComplete || (id === "password" ? "current-password" : id)
           }
-          className={`${css.formInputFloat} ${
+          className={`${css.formInputFloat} ${className} ${
             error ? css.formInputErrorFloat : ""
           }`}
         />

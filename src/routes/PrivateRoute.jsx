@@ -10,11 +10,8 @@ function PrivateRoute({ children }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
 
-  console.log("🔒 PrivateRoute check:", { isLoggedIn, isRefreshing });
-
   // Якщо йде перевірка токена - не редіректимо
   if (isRefreshing) {
-    console.log("⏳ PrivateRoute: showing loading");
     return (
       <div
         style={{

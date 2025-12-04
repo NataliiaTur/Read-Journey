@@ -1,0 +1,36 @@
+.readingPage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 0 40px;
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-size: 18px;
+  color: rgba(249, 249, 249, 0.6);
+}
+
+.error {
+  color: #e74a3b;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .readingPage {
+    gap: 16px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {
+  .readingPage {
+    flex-direction: row;
+    gap: 16px;
+  }
+}

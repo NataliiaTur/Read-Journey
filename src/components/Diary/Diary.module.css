@@ -1,0 +1,251 @@
+.diary {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  margin: 0;
+}
+
+.viewSwitcher {
+  display: flex;
+  gap: 8px;
+}
+
+.viewButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.viewButton:hover {
+  border-color: #4f92f7;
+}
+
+.viewButton.active {
+  background: #4f92f7;
+  border-color: #4f92f7;
+}
+
+.viewIcon {
+  width: 20px;
+  height: 20px;
+  color: #f9f9f9;
+}
+
+/* Diary Content */
+.diaryContent {
+  width: 100%;
+  max-width: 295px;
+}
+
+.emptyText {
+  font-size: 14px;
+  line-height: 1.3;
+  color: rgba(249, 249, 249, 0.5);
+  text-align: center;
+  margin: 20px 0;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.historyItem {
+  background: #262626;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.date {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 133%;
+  letter-spacing: -0.02em;
+  color: rgba(249, 249, 249, 0.5);
+}
+
+.pagesRead {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  color: #f9f9f9;
+}
+
+.historyDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.stats {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex: 1;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.percentage {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  color: #f9f9f9;
+}
+
+.time {
+  font-size: 10px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: rgba(249, 249, 249, 0.5);
+}
+
+.speedChart {
+  width: 60px;
+  height: 40px;
+  background: #1f1f1f;
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+  padding: 4px;
+  position: relative;
+}
+
+.speedBar {
+  width: 100%;
+  background: linear-gradient(
+    to top,
+    #30b94d 0%,
+    #30b94d 50%,
+    rgba(48, 185, 77, 0.5) 100%
+  );
+  border-radius: 2px;
+  transition: height 0.3s;
+  min-height: 10%;
+}
+
+.speed {
+  font-size: 10px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: rgba(249, 249, 249, 0.5);
+  white-space: nowrap;
+}
+
+.deleteButton {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: transparent;
+  border: 1px solid rgba(232, 80, 80, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.deleteButton:hover {
+  background: rgba(232, 80, 80, 0.1);
+  border-color: #e85050;
+}
+
+.trashIcon {
+  width: 14px;
+  height: 14px;
+  color: #e85050;
+}
+
+/* Statistics Content */
+.statisticsContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.statisticsText {
+  font-size: 14px;
+  line-height: 1.3;
+  color: rgba(249, 249, 249, 0.5);
+  text-align: center;
+  max-width: 295px;
+  margin: 0;
+}
+
+.statisticsPlaceholder {
+  width: 100%;
+  height: 200px;
+  background: #262626;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(249, 249, 249, 0.3);
+  font-size: 14px;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .diaryContent {
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .viewButton {
+    width: 44px;
+    height: 44px;
+  }
+
+  .viewIcon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {
+  .diaryContent {
+    max-width: 313px;
+  }
+}

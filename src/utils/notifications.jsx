@@ -78,8 +78,9 @@ export const showOperationSuccess = (operation) => {
     logout: "Logged out successfully",
     bookAdded: "Book added to your library!",
     bookRemoved: "Book removed from your library",
-    bookAlreadyInLibrary: "This book is already in your library!", // ✅ Додано
+    bookAlreadyInLibrary: "This book is already in your library!",
     readingStarted: "Reading session started!",
+    readingFinished: "Reading session completed!",
     readingStopped: "Reading session completed!",
     bookFinished: "Congratulations! Book finished!",
     readingDeleted: "Reading record deleted",

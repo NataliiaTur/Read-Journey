@@ -1,0 +1,164 @@
+.myBook {
+  background: #1f1f1f;
+  border-radius: 30px;
+  padding: 40px 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  margin: 0 0 40px;
+}
+
+.bookContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageWrapper {
+  width: 137px;
+  height: 208px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #262626;
+  margin-bottom: 20px;
+}
+
+.bookImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bookTitle {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  text-align: center;
+  margin: 0 0 4px;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.bookAuthor {
+  font-size: 12px;
+  line-height: 117%;
+  letter-spacing: -0.02em;
+  color: #686868;
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+/* Play Button */
+.playButton {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.playButton:hover {
+  transform: scale(1.05);
+}
+
+.playButtonOuter {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #f9f9f9;
+  background: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Play Icon (червоне коло) */
+.playIconInner {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e85050;
+}
+
+/* Stop Icon (червоний квадрат) */
+.stopIcon {
+  width: 15px;
+  height: 15px;
+  background: #e85050;
+  border-radius: 2px;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .myBook {
+    padding: 40px;
+  }
+
+  .title {
+    font-size: 32px;
+    margin-bottom: 50px;
+  }
+
+  .imageWrapper {
+    width: 169px;
+    height: 256px;
+  }
+
+  .bookTitle {
+    font-size: 20px;
+  }
+
+  .bookAuthor {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  .playButton {
+    width: 50px;
+    height: 50px;
+  }
+
+  .playButtonOuter {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #f9f9f9;
+  }
+
+  .playIconInner {
+    width: 36px;
+    height: 36px;
+  }
+
+  .stopIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {
+  .myBook {
+    max-width: 847px;
+  }
+
+  .imageWrapper {
+    width: 224px;
+    height: 340px;
+  }
+}

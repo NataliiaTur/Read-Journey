@@ -16,10 +16,10 @@ import RegisterPage from "@pages/RegisterPage/RegisterPage";
 import LoginPage from "@pages/LoginPage/LoginPage";
 import RecommendedPage from "@pages/RecommendedPage/RecommendedPage.jsx";
 import LibraryPage from "@pages/LibraryPage/LibraryPage.jsx";
+import ReadingPage from "@pages/ReadingPage/ReadingPage.jsx";
 
 // Тимчасові заглушки для сторінок
 const WelcomePage = () => <div>Welcome Page</div>;
-const ReadingPage = () => <div>Reading Page</div>;
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -27,20 +27,15 @@ const AppRoutes = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
   const token = useSelector(selectToken);
 
-  console.log("🔍 AppRoutes render:", { token, isLoggedIn, isRefreshing });
-
   // Перевіряємо токен при завантаженні додатку
   useEffect(() => {
-    console.log("🔄 AppRoutes useEffect:", { token, isLoggedIn });
     if (token && !isLoggedIn) {
-      console.log("📞 Dispatching getCurrentUser");
       dispatch(getCurrentUser());
     }
   }, [dispatch, token, isLoggedIn]);
 
   // Показуємо loader поки перевіряємо токен
   if (isRefreshing) {
-    console.log("⏳ Showing loading state");
     return (
       <div
         style={{
@@ -56,7 +51,7 @@ const AppRoutes = () => {
       </div>
     );
   }
-  console.log("✅ Rendering routes");
+
   return (
     <Routes>
       {/* Публічні роути */}
@@ -90,7 +85,7 @@ const AppRoutes = () => {
       >
         <Route path="/recommended" element={<RecommendedPage />} />
         <Route path="/library" element={<LibraryPage />} />
-        <Route path="/reading" element={<ReadingPage />} />
+        <Route path="/reading/:id" element={<ReadingPage />} />
       </Route>
 
       {/* Редірект для невідомих роутів */}
