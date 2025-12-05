@@ -8,11 +8,12 @@ const Diary = ({ book }) => {
   const [viewMode, setViewMode] = useState("diary"); // 'diary' or 'statistics'
   const [deleteReading] = useDeleteReadingMutation();
 
-  const handleDeleteReading = async (readingId) => {
+  const handleDeleteReading = async (readingIndex) => {
     try {
+      // API очікує index елемента в масиві progress
       await deleteReading({
         bookId: book._id,
-        readingId,
+        readingId: readingIndex,
       }).unwrap();
       showOperationSuccess("readingDeleted");
     } catch (error) {
@@ -20,8 +21,11 @@ const Diary = ({ book }) => {
     }
   };
 
-  // Отримуємо історію читання
-  const readingHistory = book.progress || [];
+  // Отримуємо тільки завершену історію читання (status: "inactive")
+  const readingHistory =
+    book.progress?.filter(
+      (entry) => entry.status === "inactive" && entry.finishPage
+    ) || [];
 
   // Функція для форматування дати
   const formatDate = (dateString) => {
@@ -35,13 +39,23 @@ const Diary = ({ book }) => {
 
   // Функція для підрахунку відсотків
   const calculatePercentage = (pagesRead) => {
+    if (!book.totalPages || pagesRead <= 0) return "0.0";
     return ((pagesRead / book.totalPages) * 100).toFixed(1);
   };
 
-  // Функція для підрахунку швидкості читання
+  // Функція для підрахунку швидкості читання (pages per hour)
   const calculateSpeed = (pagesRead, timeMinutes) => {
-    if (!timeMinutes) return 0;
+    if (!timeMinutes || timeMinutes <= 0) return 0;
     return Math.round((pagesRead / timeMinutes) * 60);
+  };
+
+  // Функція для підрахунку часу читання в хвилинах
+  const calculateTimeSpent = (startReading, finishReading) => {
+    if (!startReading || !finishReading) return 0;
+    const start = new Date(startReading);
+    const finish = new Date(finishReading);
+    const diffMs = finish - start;
+    return Math.round(diffMs / 60000); // конвертуємо мілісекунди в хвилини
   };
 
   return (
@@ -81,56 +95,66 @@ const Diary = ({ book }) => {
             <p className={css.emptyText}>No reading history yet</p>
           ) : (
             <div className={css.historyList}>
-              {readingHistory.map((entry) => (
-                <div key={entry._id} className={css.historyItem}>
-                  <div className={css.historyHeader}>
-                    <span className={css.date}>
-                      {formatDate(entry.startDate)}
-                    </span>
-                    <span className={css.pagesRead}>
-                      {entry.pagesRead} pages
-                    </span>
-                  </div>
+              {readingHistory.map((entry, index) => {
+                // ✅ Підраховуємо кількість прочитаних сторінок
+                const pagesRead = entry.finishPage - entry.startPage;
 
-                  <div className={css.historyDetails}>
-                    <div className={css.stats}>
-                      <div className={css.statItem}>
-                        <span className={css.percentage}>
-                          {calculatePercentage(entry.pagesRead)}%
-                        </span>
-                        <span className={css.time}>
-                          {entry.timeSpent || 0} minutes
-                        </span>
-                      </div>
+                // ✅ Підраховуємо час читання
+                const timeSpent = calculateTimeSpent(
+                  entry.startReading,
+                  entry.finishReading
+                );
 
-                      <div className={css.speedChart}>
-                        <div
-                          className={css.speedBar}
-                          style={{
-                            height: `${Math.min(
-                              calculatePercentage(entry.pagesRead),
-                              100
-                            )}%`,
-                          }}
-                        />
-                      </div>
+                // ✅ Використовуємо швидкість з API або розраховуємо
+                const speed =
+                  entry.speed || calculateSpeed(pagesRead, timeSpent);
 
-                      <span className={css.speed}>
-                        {calculateSpeed(entry.pagesRead, entry.timeSpent)} pages
-                        per hour
+                return (
+                  <div key={index} className={css.historyItem}>
+                    <div className={css.historyHeader}>
+                      <span className={css.date}>
+                        {formatDate(entry.startReading)}
                       </span>
+                      <span className={css.pagesRead}>{pagesRead} pages</span>
                     </div>
 
-                    <button
-                      className={css.deleteButton}
-                      onClick={() => handleDeleteReading(entry._id)}
-                      aria-label="Delete reading entry"
-                    >
-                      <Icon name="trash" className={css.trashIcon} />
-                    </button>
+                    <div className={css.historyDetails}>
+                      <div className={css.stats}>
+                        <div className={css.statItem}>
+                          <span className={css.percentage}>
+                            {calculatePercentage(pagesRead)}%
+                          </span>
+                          <span className={css.time}>{timeSpent} minutes</span>
+                        </div>
+
+                        <div className={css.speedChart}>
+                          <div
+                            className={css.speedBar}
+                            style={{
+                              height: `${Math.min(
+                                parseFloat(calculatePercentage(pagesRead)),
+                                100
+                              )}%`,
+                            }}
+                          />
+                        </div>
+
+                        <span className={css.speed}>
+                          {speed} pages per hour
+                        </span>
+                      </div>
+
+                      <button
+                        className={css.deleteButton}
+                        onClick={() => handleDeleteReading(index)}
+                        aria-label="Delete reading entry"
+                      >
+                        <Icon name="trash" className={css.trashIcon} />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

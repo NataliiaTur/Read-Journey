@@ -11,6 +11,7 @@ import { Button } from "@components/Button/Button.jsx";
 import FloatingLabelInput from "@components/FloatingLabelInput/FloatingLabelInput.jsx";
 import Diary from "@components/Diary/Diary.jsx";
 import Icon from "@components/Icon/Icon.jsx";
+import BookFinishedModal from "@components/BookFinishedModal/BookFinishedModal.jsx";
 import css from "./ReadingDashboard.module.css";
 
 const readingSchema = yup.object().shape({
@@ -27,6 +28,7 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
   );
 
   const [isReading, setIsReading] = useState(hasActiveReading || false);
+  const [showFinishedModal, setShowFinishedModal] = useState(false);
   const [startReading] = useStartReadingMutation();
   const [finishReading] = useFinishReadingMutation();
 
@@ -39,13 +41,13 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
   } = useForm({
     resolver: yupResolver(readingSchema),
     defaultValues: {
-      page: 1,
+      page: 1, // ✅ Змінено з 0 на 1
     },
   });
 
   const currentPage = watch("page");
 
-  // Зберігаємо функцію submit в ref для виклику ззовні
+  // ✅ Зберігаємо функцію submit в ref для виклику ззовні
   useEffect(() => {
     if (formSubmitRef) {
       formSubmitRef.current = handleSubmit(onSubmit);
@@ -62,7 +64,7 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
     setIsReading(hasActive);
     onReadingStateChange(hasActive);
 
-    // Встановлюємо правильну сторінку в залежності від стану
+    // ✅ Встановлюємо правильну сторінку в залежності від стану
     if (hasActive && activeEntry?.startPage !== undefined) {
       // Якщо є активне читання - користувач може ввести де зупинився
       // Показуємо startPage, бо він може не прочитати навіть 1 сторінку
@@ -106,7 +108,7 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
         onReadingStateChange(true);
         showOperationSuccess("readingStarted");
 
-        //НЕ змінюємо page після старту - користувач сам введе де зупинився
+        // ❌ НЕ змінюємо page після старту - користувач сам введе де зупинився
       } else {
         // Закінчити читання
         const stopPage = Number(data.page);
@@ -123,6 +125,11 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
         setIsReading(false);
         onReadingStateChange(false);
         showOperationSuccess("readingFinished");
+
+        // ✅ Перевіряємо чи книга дочитана
+        if (stopPage >= book.totalPages) {
+          setShowFinishedModal(true);
+        }
 
         // ✅ Після зупинки встановлюємо наступну сторінку для продовження
         setValue("page", stopPage + 1);
@@ -169,6 +176,11 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
         </div>
       ) : (
         <Diary book={book} />
+      )}
+
+      {/* Book Finished Modal */}
+      {showFinishedModal && (
+        <BookFinishedModal onClose={() => setShowFinishedModal(false)} />
       )}
     </div>
   );
