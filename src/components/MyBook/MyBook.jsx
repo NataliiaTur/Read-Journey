@@ -2,13 +2,8 @@ import Icon from "@components/Icon/Icon.jsx";
 import withoutPoster from "@assets/images/withoutPoster1xDesc.webp";
 import css from "./MyBook.module.css";
 
-const MyBook = ({ book, isReading }) => {
+const MyBook = ({ book, isReading, onPlayClick }) => {
   const { imageUrl, title, author } = book;
-
-  const handlePlayClick = () => {
-    // TODO: Додати логіку для відтворення аудіокниги
-    console.log("Play audio book");
-  };
 
   return (
     <div className={css.myBook}>
@@ -32,8 +27,9 @@ const MyBook = ({ book, isReading }) => {
 
         <button
           className={css.playButton}
-          onClick={handlePlayClick}
+          onClick={onPlayClick}
           aria-label={isReading ? "Stop reading" : "Start reading"}
+          type="button"
         >
           <div className={css.playButtonOuter}>
             {isReading ? (

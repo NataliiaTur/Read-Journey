@@ -83,20 +83,20 @@ export const booksApi = createApi({
 
     // Почати читання
     startReading: builder.mutation({
-      query: ({ bookId, page }) => ({
+      query: ({ id, page }) => ({
         url: "/books/reading/start",
         method: "POST",
-        body: { bookId, page },
+        body: { id, page },
       }),
-      invalidatesTags: ["Reading", "UserBooks"],
+      invalidatesTags: ["Reading", "UserBooks", "Book"],
     }),
 
     // Закінчити читання
     finishReading: builder.mutation({
-      query: ({ bookId, page }) => ({
+      query: ({ id, page }) => ({
         url: "/books/reading/finish",
         method: "POST",
-        body: { bookId, page },
+        body: { id, page },
       }),
       invalidatesTags: ["Reading", "UserBooks", "Book"],
     }),
