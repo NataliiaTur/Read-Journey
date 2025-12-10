@@ -1,0 +1,202 @@
+.homePage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.recommendedBooks {
+  background: #1f1f1f;
+  border-radius: 30px;
+  padding: 40px 20px;
+  width: 335px;
+  min-height: 382px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 34px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.paginationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.paginationButton:hover:not(:disabled) {
+  border-color: #4f92f7;
+  background: rgba(79, 146, 247, 0.1);
+}
+
+.paginationButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.arrowIcon {
+  width: 16px;
+  height: 16px;
+  color: #f9f9f9;
+}
+
+.booksList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 21px;
+  justify-items: center;
+}
+
+.bookWrapper {
+  position: relative;
+}
+
+/* Підказка про логін */
+.loginPrompt {
+  background: rgba(79, 146, 247, 0.1);
+  border: 1px solid rgba(79, 146, 247, 0.3);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.promptText {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(249, 249, 249, 0.8);
+  margin: 0;
+}
+
+.promptLink {
+  background: none;
+  border: none;
+  color: #4f92f7;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0;
+  transition: color 0.3s;
+}
+
+.promptLink:hover {
+  color: #6ba3f8;
+}
+
+/* Mobile: 2 книжки */
+@media screen and (max-width: 767px) {
+  .booksList > *:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .homePage {
+    gap: 16px;
+  }
+
+  .recommendedBooks {
+    padding: 40px;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 704px;
+  }
+
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 114%;
+  }
+
+  .booksList {
+    gap: 25px;
+  }
+
+  .booksList > * {
+    display: block;
+    flex: 0 1 calc((100% - 3 * 25px) / 4);
+  }
+
+  .booksList > *:nth-child(n + 9) {
+    display: none;
+  }
+
+  .paginationButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .arrowIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .promptText {
+    font-size: 16px;
+  }
+
+  .promptLink {
+    font-size: 16px;
+  }
+}
+
+/* Desktop*/
+@media screen and (min-width: 1440px) {
+  .homePage {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .recommendedBooks {
+    padding: 40px 42px 28px 40px;
+    width: 100%;
+    max-width: 847px;
+  }
+
+  .booksList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 19px;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+  }
+
+  .booksList > * {
+    flex: 0 0 calc((100% - 4 * 20px) / 5);
+  }
+
+  .booksList > *:nth-child(n + 11) {
+    display: none;
+  }
+}

@@ -69,7 +69,6 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(logout.rejected, (state) => {
-        // Навіть якщо logout на сервері не вдався, очищуємо стан
         state.user = null;
         state.token = null;
         state.isLoggedIn = false;
@@ -84,7 +83,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(getCurrentUser.rejected, (state) => {
+      .addCase(getCurrentUser.rejected, (state, action) => {
         state.isRefreshing = false;
         state.token = null;
         state.isLoggedIn = false;

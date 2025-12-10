@@ -4,7 +4,7 @@ import { clearFilters } from "@redux/books/booksSlice.js";
 import Dashboard from "@components/Dashboard/Dashboard.jsx";
 import RecommendedBooks from "@components/RecommendedBooks/RecommendedBooks.jsx";
 import BookModal from "@components/BookModal/BookModal.jsx";
-import SuccessModal from "@components/SuccessModal/SuccessModal.jsx";
+import AddBookSuccessModal from "@components/AddBookSuccessModal/AddBookSuccessModal.jsx";
 import css from "./RecommendedPage.module.css";
 
 const RecommendedPage = () => {
@@ -58,7 +58,9 @@ const RecommendedPage = () => {
           mode="recommended"
         />
       )}
-      {showSuccessModal && <SuccessModal onClose={handleCloseSuccessModal} />}
+      {showSuccessModal && (
+        <AddBookSuccessModal onClose={handleCloseSuccessModal} />
+      )}
     </div>
   );
 };

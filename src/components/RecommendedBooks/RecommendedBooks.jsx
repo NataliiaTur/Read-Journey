@@ -1,6 +1,7 @@
 import css from "./RecommendedBooks.module.css";
 import { useSelector } from "react-redux";
 import { selectFilters } from "@redux/books/booksSlice.js";
+import { selectIsLoggedIn } from "@redux/auth/authSlice.js";
 import { useDebounce } from "@hooks/useDebounce";
 import {
   useGetRecommendedBooksQuery,
@@ -11,11 +12,13 @@ import Icon from "../Icon/Icon.jsx";
 
 const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
   const filters = useSelector(selectFilters);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const limit = 10;
 
   const debouncedTitle = useDebounce(filters.title, 500);
   const debouncedAuthor = useDebounce(filters.author, 500);
 
+  // Цей запит працює для ВСІХ (без токена)
   const { data, isLoading, error, isFetching } = useGetRecommendedBooksQuery({
     page: currentPage,
     limit,
@@ -23,8 +26,10 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
     author: debouncedAuthor,
   });
 
-  // Отримуємо книги користувача
-  const { data: userBooksData } = useGetUserBooksQuery();
+  // Цей запит тільки для авторизованих (щоб показати бейджі "In Library")
+  const { data: userBooksData } = useGetUserBooksQuery(undefined, {
+    skip: !isLoggedIn,
+  });
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -69,10 +74,13 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
   const books = data?.results || [];
   const totalPages = data?.totalPages || 1;
 
-  // Створюємо Set з ID книг користувача для швидкої перевірки
-  const userBooks = Array.isArray(userBooksData)
-    ? userBooksData
-    : userBooksData?.results || [];
+  // Перевіряємо які книги вже в бібліотеці (тільки для авторизованих)
+  const userBooks =
+    isLoggedIn && Array.isArray(userBooksData)
+      ? userBooksData
+      : isLoggedIn && userBooksData?.results
+      ? userBooksData.results
+      : [];
 
   const userBookKeys = new Set(
     userBooks.map((book) => `${book.title}-${book.author}`)
@@ -120,7 +128,7 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
         <div className={css.booksList}>
           {books.map((book) => {
             const bookKey = `${book.title}-${book.author}`;
-            const isInLibrary = userBookKeys.has(bookKey);
+            const isInLibrary = isLoggedIn && userBookKeys.has(bookKey);
 
             return (
               <div key={book._id} className={css.bookWrapper}>
@@ -129,6 +137,7 @@ const RecommendedBooks = ({ onBookClick, currentPage, onPageChange }) => {
                   onClick={() => onBookClick(book)}
                   className={isInLibrary ? css.bookInLibrary : ""}
                 />
+                {/* Бейдж "In Library" тільки для авторизованих */}
                 {isInLibrary && (
                   <div className={css.inLibraryBadge}>
                     <Icon name="check" size={14} />

@@ -8,6 +8,7 @@ export const booksApi = createApi({
     baseUrl: BASE_URL,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
+      // ✅ Завжди додаємо токен якщо він є
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }
@@ -15,11 +16,10 @@ export const booksApi = createApi({
     },
   }),
   tagTypes: ["RecommendedBooks", "UserBooks", "Book", "Reading"],
-  // ✅ Додаємо глобальні налаштування
-  keepUnusedDataFor: 60, // Тримати кеш 60 секунд
-  refetchOnMountOrArgChange: 30, // Перезапитувати якщо дані старші 30 сек
-  refetchOnFocus: false, // Не перезапитувати при фокусі на вікно
-  refetchOnReconnect: true, // Перезапитувати при відновленні з'єднання
+  keepUnusedDataFor: 60,
+  refetchOnMountOrArgChange: 30,
+  refetchOnFocus: false,
+  refetchOnReconnect: true,
 
   endpoints: (builder) => ({
     // Отримати рекомендовані книги
@@ -107,7 +107,7 @@ export const booksApi = createApi({
         url: `/books/reading?bookId=${bookId}&readingId=${readingId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Reading", "Book"],
+      invalidatesTags: ["Reading", "Book", "UserBooks"],
     }),
   }),
 });

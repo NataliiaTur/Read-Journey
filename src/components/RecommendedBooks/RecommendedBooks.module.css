@@ -279,7 +279,7 @@
 .retryButton {
   margin-top: 12px;
   padding: 12px 24px;
-  background: #4f92f7;
+  background-color: #e74a3b;
   border: none;
   border-radius: 30px;
   color: #f9f9f9;
@@ -290,6 +290,6 @@
 }
 
 .retryButton:hover {
-  background: #3a7dd8;
+  background: #e74a3b;
   transform: translateY(-2px);
 }

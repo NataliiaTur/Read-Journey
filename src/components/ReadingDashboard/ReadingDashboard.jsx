@@ -41,20 +41,18 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
   } = useForm({
     resolver: yupResolver(readingSchema),
     defaultValues: {
-      page: 1, // ✅ Змінено з 0 на 1
+      page: 1,
     },
   });
 
   const currentPage = watch("page");
 
-  // ✅ Зберігаємо функцію submit в ref для виклику ззовні
   useEffect(() => {
     if (formSubmitRef) {
       formSubmitRef.current = handleSubmit(onSubmit);
     }
   }, [formSubmitRef, handleSubmit]);
 
-  // Синхронізуємо стан читання з даними книги
   useEffect(() => {
     const activeEntry = book.progress?.find(
       (entry) => entry.status === "active"
@@ -64,13 +62,9 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
     setIsReading(hasActive);
     onReadingStateChange(hasActive);
 
-    // ✅ Встановлюємо правильну сторінку в залежності від стану
     if (hasActive && activeEntry?.startPage !== undefined) {
-      // Якщо є активне читання - користувач може ввести де зупинився
-      // Показуємо startPage, бо він може не прочитати навіть 1 сторінку
       setValue("page", activeEntry.startPage);
     } else if (book.progress?.length > 0) {
-      // Якщо є історія - беремо останню завершену сторінку
       const lastEntry = [...book.progress]
         .filter((entry) => entry.status === "inactive" && entry.finishPage)
         .sort(
@@ -78,15 +72,13 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
         )[0];
 
       if (lastEntry?.finishPage) {
-        // Починаємо з наступної після останньої прочитаної
         setValue("page", lastEntry.finishPage + 1);
       }
     }
-    // Якщо немає ніякої історії - залишається дефолтна сторінка 1
   }, [book.progress, onReadingStateChange, setValue]);
 
   const onSubmit = async (data) => {
-    console.log("📝 Form submitted:", {
+    console.log("Form submitted:", {
       isReading,
       page: data.page,
       bookId: book._id,
@@ -95,7 +87,7 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
     try {
       if (!isReading) {
         // Почати читання
-        console.log("🚀 Starting reading:", {
+        console.log(" Starting reading:", {
           id: book._id,
           page: Number(data.page),
         });
@@ -107,13 +99,11 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
         setIsReading(true);
         onReadingStateChange(true);
         showOperationSuccess("readingStarted");
-
-        // ❌ НЕ змінюємо page після старту - користувач сам введе де зупинився
       } else {
         // Закінчити читання
         const stopPage = Number(data.page);
 
-        console.log("🛑 Finishing reading:", {
+        console.log("Finishing reading:", {
           id: book._id,
           page: stopPage,
         });
@@ -126,16 +116,14 @@ const ReadingDashboard = ({ book, onReadingStateChange, formSubmitRef }) => {
         onReadingStateChange(false);
         showOperationSuccess("readingFinished");
 
-        // ✅ Перевіряємо чи книга дочитана
         if (stopPage >= book.totalPages) {
           setShowFinishedModal(true);
         }
 
-        // ✅ Після зупинки встановлюємо наступну сторінку для продовження
         setValue("page", stopPage + 1);
       }
     } catch (error) {
-      console.error("❌ Reading error:", error);
+      console.error("Reading error:", error);
       handleApiError(error);
     }
   };

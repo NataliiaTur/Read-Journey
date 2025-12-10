@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { filterBooksSchema } from "../../schemas/validationSchemas.js";
@@ -7,13 +8,15 @@ import {
   clearFilters,
   selectFilters,
 } from "../../redux/books/booksSlice.js";
+import { showInfoNotification } from "@utils/notifications.jsx";
 import { Button } from "@components/Button/Button.jsx";
 import Icon from "@components/Icon/Icon.jsx";
 import css from "./Dashboard.module.css";
 import FloatingLabelInput from "../FloatingLabelInput/FloatingLabelInput.jsx";
 
-const Dashboard = ({ type, onFiltersApply }) => {
+const Dashboard = ({ type, onFiltersApply, isPublic = false }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const filters = useSelector(selectFilters);
 
   const {
@@ -26,7 +29,23 @@ const Dashboard = ({ type, onFiltersApply }) => {
     defaultValues: { title: "", author: "" },
   });
 
+  // Обробник для публічного режиму
+  const handlePublicAction = (e) => {
+    if (isPublic) {
+      e.preventDefault();
+      showInfoNotification("Please login to use this feature");
+      setTimeout(() => navigate("/login"), 2000);
+    }
+  };
+
   const onSubmit = async (data) => {
+    // Якщо публічний режим - редірект на логін
+    if (isPublic) {
+      showInfoNotification("Please login to use filters");
+      setTimeout(() => navigate("/login"), 2000);
+      return;
+    }
+
     dispatch(setFilters(data));
 
     if (onFiltersApply) {
@@ -43,56 +62,41 @@ const Dashboard = ({ type, onFiltersApply }) => {
       {/* Filters Block */}
       <div className={css.filtersBlock}>
         <div className={css.filtersWrapper}>
-          {" "}
           <h2 className={css.title}>Filters</h2>
           <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-            {/* <div className={css.inputWrapper}>
-              <label htmlFor="title" className={css.label}>
-                Book title:
-              </label>
-              <input
+            {/* Title input - блокуємо для неавторизованих */}
+            <div onClick={handlePublicAction}>
+              <FloatingLabelInput
                 id="title"
-                type="text"
-                placeholder="Enter book title"
-                className={css.input}
-                {...register("title")}
+                labelName="Book title"
+                placeholder="Enter text"
+                register={register}
+                error={errors.title}
+                disabled={isPublic}
+                className={isPublic ? css.disabledInput : ""}
               />
-              {errors.title && (
-                <span className={css.error}>{errors.title.message}</span>
-              )}
-            </div> */}
-            <FloatingLabelInput
-              id="title"
-              labelName="Book title"
-              placeholder="Enter text"
-              register={register}
-              error={errors.title}
-            />
+            </div>
 
-            {/* <div className={css.inputWrapper}>
-              <label htmlFor="author" className={css.label}>
-                The author:
-              </label>
-              <input
+            {/* Author input - блокуємо для неавторизованих */}
+            <div onClick={handlePublicAction}>
+              <FloatingLabelInput
                 id="author"
-                type="text"
-                placeholder="Enter author name"
-                className={css.input}
-                {...register("author")}
+                labelName="The author"
+                placeholder="Enter text"
+                register={register}
+                error={errors.author}
+                disabled={isPublic}
+                className={isPublic ? css.disabledInput : ""}
               />
-              {errors.author && (
-                <span className={css.error}>{errors.author.message}</span>
-              )}
-            </div> */}
-            <FloatingLabelInput
-              id="author"
-              labelName="The author"
-              placeholder="Enter text"
-              register={register}
-              error={errors.author}
-            />
+            </div>
 
-            <Button type="submit" className={css.applyButton}>
+            {/* Submit button */}
+            <Button
+              type="submit"
+              className={`${css.applyButton} ${
+                isPublic ? css.disabledButton : ""
+              }`}
+            >
               To apply
             </Button>
           </form>
@@ -121,7 +125,13 @@ const Dashboard = ({ type, onFiltersApply }) => {
               </p>
             </li>
           </ol>
-          <a href="/library" className={css.libraryLink}>
+
+          {/* My library link - редірект на логін для неавторизованих */}
+          <a
+            href={isPublic ? "#" : "/library"}
+            className={css.libraryLink}
+            onClick={isPublic ? handlePublicAction : undefined}
+          >
             <span>My library</span>
             <Icon name="log-in" className={css.arrowIcon} />
           </a>

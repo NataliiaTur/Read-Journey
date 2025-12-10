@@ -10,16 +10,15 @@ import {
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import MainLayout from "@components/MainLayout/MainLayout";
+import PublicLayout from "@components/PublicLayout/PublicLayout";
 
 // Імпорти сторінок
 import RegisterPage from "@pages/RegisterPage/RegisterPage";
 import LoginPage from "@pages/LoginPage/LoginPage";
+import HomePage from "@pages/HomePage/HomePage.jsx";
 import RecommendedPage from "@pages/RecommendedPage/RecommendedPage.jsx";
 import LibraryPage from "@pages/LibraryPage/LibraryPage.jsx";
 import ReadingPage from "@pages/ReadingPage/ReadingPage.jsx";
-
-// Тимчасові заглушки для сторінок
-const WelcomePage = () => <div>Welcome Page</div>;
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -54,9 +53,12 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      {/* Публічні роути */}
-      <Route path="/" element={<WelcomePage />} />
+      {/* Публічні роути з PublicLayout */}
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<HomePage />} />
+      </Route>
 
+      {/* Роути авторизації без layout */}
       <Route
         path="/register"
         element={

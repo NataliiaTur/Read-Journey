@@ -7,14 +7,16 @@ import {
 import { showOperationError, handleApiError } from "../../utils/notifications";
 import { Button } from "../Button/Button";
 import Icon from "../Icon/Icon";
-import styles from "./BookModal.module.css";
+import css from "./BookModal.module.css";
 
 const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
   const navigate = useNavigate();
   const [addBookToLibrary, { isLoading }] = useAddBookToLibraryMutation();
 
-  //  Отримуємо список книг користувача
-  const { data: userBooksData } = useGetUserBooksQuery();
+  // Отримуємо список книг користувача (тільки для авторизованих)
+  const { data: userBooksData } = useGetUserBooksQuery(undefined, {
+    skip: mode === "public", // ✅ Пропускаємо запит для публічного режиму
+  });
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -39,6 +41,14 @@ const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
   };
 
   const handleAddToLibrary = async () => {
+    // ✅ Якщо публічний режим - викликаємо callback (показ повідомлення + редірект)
+    if (mode === "public") {
+      if (onSuccess) {
+        onSuccess();
+      }
+      return;
+    }
+
     // Перевіряємо чи книга вже є в бібліотеці
     const userBooks = Array.isArray(userBooksData)
       ? userBooksData
@@ -71,46 +81,64 @@ const BookModal = ({ book, onClose, onSuccess, mode = "recommended" }) => {
     navigate(`/reading/${book._id}`);
   };
 
+  // ✅ Визначаємо текст та дію кнопки
+  const renderButton = () => {
+    if (mode === "public") {
+      return (
+        <Button onClick={handleAddToLibrary} className={css.actionButton}>
+          Login to add
+        </Button>
+      );
+    }
+
+    if (mode === "recommended") {
+      return (
+        <Button
+          onClick={handleAddToLibrary}
+          disabled={isLoading}
+          className={css.actionButton}
+        >
+          {isLoading ? "Adding..." : "Add to library"}
+        </Button>
+      );
+    }
+
+    // mode === "library"
+    return (
+      <Button onClick={handleStartReading} className={css.actionButton}>
+        Start reading
+      </Button>
+    );
+  };
+
   return (
-    <div className={styles.backdrop} onClick={handleBackdropClick}>
-      <div className={styles.modal}>
+    <div className={css.backdrop} onClick={handleBackdropClick}>
+      <div className={css.modal}>
         <button
-          className={styles.closeButton}
+          className={css.closeButton}
           onClick={onClose}
           aria-label="Close modal"
         >
-          <Icon name="x" className={styles.closeIcon} />
+          <Icon name="x" className={css.closeIcon} />
         </button>
 
-        <div className={styles.imageWrapper}>
+        <div className={css.imageWrapper}>
           {book.imageUrl ? (
             <img
               src={book.imageUrl}
               alt={book.title}
-              className={styles.bookImage}
+              className={css.bookImage}
             />
           ) : (
-            <div className={styles.placeholderImage}>No Image</div>
+            <div className={css.placeholderImage}>No Image</div>
           )}
         </div>
 
-        <h2 className={styles.title}>{book.title}</h2>
-        <p className={styles.author}>{book.author}</p>
-        <p className={styles.pages}>{book.totalPages} pages</p>
+        <h2 className={css.title}>{book.title}</h2>
+        <p className={css.author}>{book.author}</p>
+        <p className={css.pages}>{book.totalPages} pages</p>
 
-        {mode === "recommended" ? (
-          <Button
-            onClick={handleAddToLibrary}
-            disabled={isLoading}
-            className={styles.actionButton}
-          >
-            {isLoading ? "Adding..." : "Add to library"}
-          </Button>
-        ) : (
-          <Button onClick={handleStartReading} className={styles.actionButton}>
-            Start reading
-          </Button>
-        )}
+        {renderButton()}
       </div>
     </div>
   );
