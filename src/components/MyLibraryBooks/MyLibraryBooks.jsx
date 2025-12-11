@@ -15,9 +15,15 @@ const MyLibraryBooks = ({ onBookClick }) => {
   const [filter, setFilter] = useState("All books");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const { data, isLoading, error } = useGetUserBooksQuery(
-    filter === "All books" ? undefined : filter
-  );
+  const getApiStatus = (filter) => {
+    if (filter === "All books") return undefined;
+    if (filter === "Unread") return "unread";
+    if (filter === "In progress") return "in-progress";
+    if (filter === "Done") return "done";
+    return undefined;
+  };
+
+  const { data, isLoading, error } = useGetUserBooksQuery(getApiStatus(filter));
 
   const [removeBook] = useRemoveBookMutation();
 
